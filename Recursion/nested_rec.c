@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 21:05:41 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/08 21:07:32 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/08 21:19:27 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	main(void)
 {
 	int	res;
 
-	res = fun(95);
+	res = fun(99);
 	printf("%d", res);
 }
