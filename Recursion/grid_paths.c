@@ -6,9 +6,14 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 23:10:55 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/09 10:29:37 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/09 11:22:45 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * This can be solved using a dynamic programming approach
+ * it will be a lot faster: see ../'Dynamic Programming'/grid_paths.c
+*/
 
 #include <stdio.h>
 
