@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 23:10:55 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/09 13:08:11 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/09 17:54:33 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(void)
 {
 	int	a, b;
 
-	a = 51;
-	b = 9;
+	a = 4;
+	b = 4;
 	printf("paths available: %d", grid_paths(a, b));
 }
