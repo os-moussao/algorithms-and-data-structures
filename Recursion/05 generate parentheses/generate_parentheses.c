@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:12:33 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/10 21:41:05 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/10 23:08:57 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	add_str(char ***arr, int n, char *str, int len)
 	(*arr)[len - 2][strlen(str)] = ')';
 }
 
-void	get_sol(char **arr, int n, int len)
+void	get_sol(char ***array, int n, int len)
 {
-	int	i = 0, j = 0, op = n, cl = n;
+	int		i = 0, j = 0, op = n, cl = n;
+	char	**arr = *array;
 
 	while (arr[i] && strlen(arr[i]) == 2 * n)
 		i++;
@@ -39,11 +40,13 @@ void	get_sol(char **arr, int n, int len)
 			cl--;
 		j++;
 	}
-	if (cl > op)
-		add_str(&arr, n, arr[i], ++len);
+	if (cl > op && op)
+		add_str(array, n, arr[i], ++len), arr = *array;
+	else if (cl > op)
+		arr[i][j] = ')';
 	if (op)
 		arr[i][j] = '(';
-	get_sol(arr, n, len);
+	get_sol(array, n, len);
 }
 
 char	**gen_parentheses(int n)
@@ -57,7 +60,7 @@ char	**gen_parentheses(int n)
 	arr[0][0] = '(';
 
 	// filling array with solutions
-	get_sol(arr, n, 2);
+	get_sol(&arr, n, 2);
 
 	// returning
 	return (arr);
@@ -69,7 +72,7 @@ int	main(void)
 {
 	char	**arr;
 
-	arr = gen_parentheses(3);
+	arr = gen_parentheses(4);
 	for (int i = 0; arr[i]; i++)
 	{
 		printf("%s\n", arr[i]);
