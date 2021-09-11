@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 21:40:48 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/11 22:14:14 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/11 22:37:27 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ long long	choose(int n, int k)
 {
 	long long	res = 1;
 
+	if (k > n || k < 0)
+		return (0);
+	if (k == 0)
+		return (1);
 	for (int i = k + 1; i <= n; i++)
 		res *= i,
 		res /= i - k;
