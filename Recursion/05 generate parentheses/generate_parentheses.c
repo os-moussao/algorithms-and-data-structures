@@ -6,9 +6,16 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 20:12:33 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/10 23:08:57 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/11 13:16:39 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+// This is the first idea that came to my mind for solving this problem
+// it's kind of a brute force solution
+//
+// there is another solution using backtracking, see: Backtracking Section --> '00 generate parentheses'
+
 
 #include <stdio.h>
 #include <stdlib.h>
