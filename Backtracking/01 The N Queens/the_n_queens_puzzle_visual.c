@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 12:58:24 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/13 15:15:46 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/13 22:07:24 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 // You can try the solutions on this site: https://www.datagenetics.com/blog/august42012/
 // or try this N Queens app: https://play.google.com/store/apps/details?id=com.ggwp.nqueens&hl=en_US&gl=US
-
-void	putnstr(char *str, int n)
-{
-	for (int i = 0; i < n; i++)
-		printf("%c", str[i]);
-	printf("\n");
-}
 
 int	is_valid_choice(int *stack, int col, int choice)
 {
@@ -46,9 +39,10 @@ void	append_sol(char ****res, int *stack, int N, int len)
 	(*res)[len  - 1] = malloc(N * sizeof(char *));
 	for (int i = 0; i < N; i++)
 	{
-		(*res)[len - 1][i] = malloc(N);
+		(*res)[len - 1][i] = malloc(N + 1);
 		for (int j = 0; j < N; j++)
 			(*res)[len - 1][i][j] = (stack[i] == j)? 'Q': '.';
+		(*res)[len - 1][i][N] = 0;
 	}
 }
 
@@ -108,7 +102,7 @@ int	main(int argc, char **argv)
 	{
 		printf("Solution #%d:\n", s + 1);
 		for (int i = 0; i < N; i++)
-			putnstr(res[s][i], N),
+			printf("%s\n", res[s][i]),
 			free(res[s][i]);
 		printf("\n");
 		free(res[s]);
