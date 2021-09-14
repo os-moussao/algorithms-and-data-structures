@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 17:28:00 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/13 12:25:00 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/14 18:30:17 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int     valid_choice(char bd[][9], int row, int col, char choice)
     }
     
     // Square check
-    sq_r = (row < 6)? (row < 3)? 0: 3: 6; // to be changed
-    sq_c = (col < 6)? (col < 3)? 0: 3: 6; // to be changed
+    sq_r = (row < 6)? (row < 3)? 0: 3: 6;
+    sq_c = (col < 6)? (col < 3)? 0: 3: 6;
 
     for (int i = sq_r; i < sq_r + 3; i++)
     {
@@ -49,18 +49,18 @@ int     valid_choice(char bd[][9], int row, int col, char choice)
     return (1);
 }
 
-int	next_pos(char board[][9], int *row, int *col)
+bool	next_pos(char board[][9], int *row, int *col)
 {
 	for (; (*row) < 9; (*row)++)
 	{
 		for (; (*col) < 9; (*col)++)
 		{
 			if (board[*row][*col] == '.')
-				return (0);
+				return (false);
 		}
 		(*col) = 0;
 	}
-	return (1);
+	return (true);
 }
 
 bool	solve_sudoku(char board[][9], int row, int col)
@@ -72,14 +72,12 @@ bool	solve_sudoku(char board[][9], int row, int col)
 
 	for (char choice = '1'; choice <= '9'; choice++)
 	{
-        if (valid_choice(board, row, col, choice))
+		if (valid_choice(board, row, col, choice))
 		{
-            board[row][col] = choice;
-
+			board[row][col] = choice;
 			// Backtracking
 			if (solve_sudoku(board, row, col))
 				return (true);
-
 			board[row][col] = '.';
 		}
 	}
