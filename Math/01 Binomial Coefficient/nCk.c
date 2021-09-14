@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 21:40:48 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/11 22:37:27 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/14 23:01:46 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 // to have the least number of iterations
 //
 //
-// but I'll just go on with the second methos
-// as both of them have a time complexity of O(n)
+// but I'll just go on with the second method
+// as both of them have the same time complexity O(n)
 long long	choose(int n, int k)
 {
 	long long	res = 1;
