@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 23:01:15 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/22 23:56:17 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/23 00:00:31 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	magic_square(int n)
 
 	msq = init_msq(n);
 	backtrack(msq, n, 0, 0);
+	put_msq(msq, n);
 	return (n * (n * n + 1) / 2);
 }
 
@@ -52,11 +53,9 @@ bool	backtrack(int **msq, int n, int row, int col)
 {
 	if (!find_next_pos(msq, n, &row, &col))
 	{
+		put_msq(msq, n);
 		if (is_magic_sq(msq, n))
-		{
-			put_msq(msq, n);
 			return (true);
-		}
 		else
 			return (false);
 	}
