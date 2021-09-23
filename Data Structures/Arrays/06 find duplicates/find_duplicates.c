@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 18:59:38 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/23 19:09:51 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/23 19:16:45 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	find_dup(int arr[], int len)
 		while (arr[i + 1] == arr[i] && i < len - 1)
 			i++, j++;
 		if (j)
-			printf("%d	", arr[i]);
+			printf("%d is appearing %d times\n", arr[i], j + 1);
 		i++;
 	}
-	printf("\n");
 }
 
 int	main(void)
