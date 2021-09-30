@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:11:13 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/30 16:17:17 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/30 16:45:19 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-void	backtrack(char *stack, char *str, int index, int k, int *total)
+void	backtrack(char *stack, char *str, int valid[], int index, int len, int k, int *total)
 {
 	if (index == k)
 	{
@@ -23,20 +23,34 @@ void	backtrack(char *stack, char *str, int index, int k, int *total)
 		return ;
 	}
 
-	for ()
+	for (int choice = 0; choice < len; choice++)
+	{
+		if (valid[choice])
+		{
+			stack[index] = str[choice];
+			valid[choice] = 0;
+			backtrack(stack, str, valid, index + 1, len, k, total);
+			valid[choice] = 1;
+		}
+	}
 }
 
 int	permutations(char *str, int k)
 {
-	int	total;
-	int	stack[k + 1];
+	int		total = 0, len = strlen(str);
+	int		valid[len];
+	char	stack[k + 1];
 
 	stack[k] = 0;
-	total = 0;
-
+	if (k <= 0 || k > len)
+		return (0);
+	for (int i = 0; i < len; i++)
+		valid[i] = 1;
+	backtrack(stack, str, valid, 0, len, k, &total);
+	return (total);
 }
 
 int	main(void)
 {
-	printf("\nTotal: %d\n", permutations("ABC", 3));
+	printf("\nTotal: %d\n", permutations("ABCD", 4));
 }
