@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:11:13 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/30 16:45:19 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/30 17:19:09 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-void	backtrack(char *stack, char *str, int valid[], int index, int len, int k, int *total)
+void	backtrack(char *stack, char *str, int valid[], int index, int k, int *total)
 {
 	if (index == k)
 	{
@@ -23,13 +23,13 @@ void	backtrack(char *stack, char *str, int valid[], int index, int len, int k, i
 		return ;
 	}
 
-	for (int choice = 0; choice < len; choice++)
+	for (int choice = 0; str[choice]; choice++)
 	{
 		if (valid[choice])
 		{
 			stack[index] = str[choice];
 			valid[choice] = 0;
-			backtrack(stack, str, valid, index + 1, len, k, total);
+			backtrack(stack, str, valid, index + 1, k, total);
 			valid[choice] = 1;
 		}
 	}
@@ -46,7 +46,7 @@ int	permutations(char *str, int k)
 		return (0);
 	for (int i = 0; i < len; i++)
 		valid[i] = 1;
-	backtrack(stack, str, valid, 0, len, k, &total);
+	backtrack(stack, str, valid, 0, k, &total);
 	return (total);
 }
 
