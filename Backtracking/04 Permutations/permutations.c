@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 15:44:50 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/30 16:00:07 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/09/30 16:31:35 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,7 @@ void	put_perm(int stack[], int len)
 	printf("\n");
 }
 
-bool	valid_choice(int stack[], int index, int choice)
-{
-	for (int i = 0; i < index; i++)
-	{
-		if (stack[i] == choice)
-			return (false);
-	}
-	return (true);
-}
-
-void	backtrack(int stack[], int index, int n, int k, int *total)
+void	backtrack(int stack[], int valid[], int index, int n, int k, int *total)
 {
 	if (index == k)
 	{
@@ -41,10 +31,12 @@ void	backtrack(int stack[], int index, int n, int k, int *total)
 
 	for (int choice = 1; choice <= n; choice++)
 	{
-		if (valid_choice(stack, index, choice))
+		if (valid[choice])
 		{
 			stack[index] = choice;
-			backtrack(stack, index + 1, n, k, total);
+			valid[choice] = 0;
+			backtrack(stack, valid, index + 1, n, k, total);
+			valid[choice] = 1;
 		}
 	}
 }
@@ -53,9 +45,14 @@ int	permutations(int n, int k)
 {
 	int	total;
 	int	stack[k];
+	int	valid[n + 1];
 
+	if (k <= 0 || k > n)
+		return (0);
+	for (int i = 1; i <= n; i++)
+		valid[i] = 1;
 	total = 0;
-	backtrack(stack, 0, n, k, &total);
+	backtrack(stack, valid, 0, n, k, &total);
 	return (total);
 }
 
