@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 17:28:40 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/30 17:56:14 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/02 13:50:32 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,34 @@ void	ft_swap(char *c1, char *c2)
 	*c2 = tmp;
 }
 
-void	backtrack(char *str, int index, char *origin)
+void	backtrack(char *str, int sw, int *total)
 {
-	if (!str[index])
-		return ;
-
-	for (int i = 0; str[i]; i++)
+	if (!str[sw])
 	{
 		printf("%s\n", str);
-		ft_swap(&str[index], &str[i]);
+		(*total)++;
+		return ;
 	}
-	strcpy(str, origin);
-	backtrack(str, index + 1, origin);
+
+	for (int i = sw; str[i]; i++)
+	{
+		ft_swap(&str[sw], &str[i]);
+		backtrack(str, sw + 1, total);
+		ft_swap(&str[sw], &str[i]);
+	}
 }
 
 int	permutations(char *str)
 {
-	char	*copy;
+	int	total = 0;
 
-	copy = strdup(str);
-	backtrack(str, 0, copy);
-	free(copy);
-	return (0);
+	backtrack(str, 0, &total);
+	return (total);
 }
 
 int	main(void)
 {
-	char	str[4] = "ABC";
+	char	str[5] = "ABCD";
 
-	permutations(str);
+	printf("\nTotal permutations: %d\n", permutations(str));
 }
