@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 14:38:38 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/02 17:07:31 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/03 12:22:20 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,66 +28,59 @@ void	ft_swap(int *a, int *b)
 	*b = tmp;
 }
 
+int	factorial(int n)
+{
+	int	res = 1;
+
+	while (n > 1)
+		res *= n--;
+	return (res);
+}
+
 void	next_perm(int perm[], int n)
 {
-	int	j, last;
+	int	j;
 
-	last = n - 1;
 	for (int i = n - 2; i >= 0; i--)
 	{
-		if (perm[i] < perm[last])
+		j = i;
+		while (perm[j] > perm[j + 1] && j < n - 1)
+			ft_swap(&perm[j++], &perm[j + 1]);
+		if (j != n - 1)
 		{
-			ft_swap(&perm[i], &perm[i + 1]);
-			j = last;
-			while (j > i + 1 && perm[j] < perm[j - 1])
-				ft_swap(&perm[j], &perm[j - 1]);
+			ft_swap(&perm[i], &perm[j + 1]);
+			j++;
+			while (perm[j] < perm[j - 1] && j > i + 1)
+				ft_swap(&perm[j--], &perm[j - 1]);
 			return ;
-		}
-		else
-		{
-			j = i;
-			while (perm[j + 1] < perm[j] && j < n - 1)
-			{
-				ft_swap(&perm[j], &perm[j + 1]);
-				last++;
-				j++;
-			}
 		}
 	}
 }
 
-int	main(void)
+int	gen_perms(int n)
 {
-	int	perm[4] = {2, 3, 4, 1};
+	int	p[n];
+	int	count;
+	int	total;
 
-	next_perm(perm, 4);
-	put_perm(perm, 4);
-	printf("\nExp: 2 4 1 3");
+	// generate first permutation
+	for (int i = 0; i < n; i++)
+		p[i] = i + 1;
+
+	total = factorial(n);
+	count = 0;
+
+	// print permutation by permutation untill hitting the last one
+	while (count <= total)
+	{
+		put_perm(p, n);
+		next_perm(p, n);
+		count++;
+	}
+	return (total);
 }
 
-/*
-1 2 3 4
-1 2 4 3
-1 3 2 4
-1 3 4 2
-1 4 2 3
-1 4 3 2
-2 1 3 4
-2 1 4 3
-2 3 1 4
-2 3 4 1
-2 4 1 3
-2 4 3 1
-3 1 2 4
-3 1 4 2
-3 2 1 4
-3 2 4 1
-3 4 1 2
-3 4 2 1
-4 1 2 3
-4 1 3 2
-4 2 1 3
-4 2 3 1
-4 3 1 2
-4 3 2 1
-*/
+int	main(void)
+{
+	printf("\nTotal: %d", gen_perms(5));
+}
