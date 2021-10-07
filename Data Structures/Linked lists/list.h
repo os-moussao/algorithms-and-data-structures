@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_node.c                                      :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 23:48:08 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/07 11:26:20 by os-moussao       ###   ########.fr       */
+/*   Created: 2021/10/07 11:17:12 by os-moussao        #+#    #+#             */
+/*   Updated: 2021/10/07 11:22:16 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../list.h"
+#ifndef LIST_H
+#define LIST_H
 
-t_node	*create_node(int data)
+typedef struct	s_node
 {
-	t_node	*node;
+	int				data;
+	struct s_list	*next;
+}				t_node;
 
-	node = malloc(sizeof(t_node));
-	node->data = data;
-	node->next = NULL;
-	return (node);
-}
-
-int	main(void)
-{
-	t_node	*node;
-
-	node = create_node(10);
-	printf("Data: %d\nNext: %p\n", node->data, node->next);
-	free(node);
-}
+#endif
