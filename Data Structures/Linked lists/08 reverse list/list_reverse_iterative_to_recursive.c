@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_reverse_recursive.c                           :+:      :+:    :+:   */
+/*   list_reverse_iterative_to_recursive.c              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 13:16:06 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/08 15:59:24 by os-moussao       ###   ########.fr       */
+/*   Created: 2021/10/08 12:45:05 by os-moussao        #+#    #+#             */
+/*   Updated: 2021/10/08 16:41:06 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../list.h"
 
-void	list_reverse_recursive(t_node **head, t_node *prev)
+/**
+ * This is just translating the code from the iterative method to recursion
+ * Nothing creative!
+ * See: tail recursion and head recursion
+*/
+void	list_reverse_recursive(t_node **head, t_node *prev, t_node *current, t_node *next)
 {
-	t_node	*next, *prev_tmp;
-
-	if (!*head)
+	if (!current)
 	{
-		(*head) = prev;
+		*head = prev;
 		return ;
 	}
-	next = (*head)->next;
-	prev_tmp = (*head);
-	(*head)->next = prev;
-	(*head) = next;
-	list_reverse_recursive(head, prev_tmp);
+	next = current->next;
+	current->next = prev;
+	prev = current;
+	current = next;
+	list_reverse_recursive(head, prev, current, next);
 }
 
 
@@ -72,7 +75,7 @@ int	main(void)
 	printf("List:\n");
 	list_display(head);
 	printf("\nList reversed:\n");
-	list_reverse_recursive(&head, NULL);
+	list_reverse_recursive(&head, NULL, head, NULL);
 	list_display(head);
 
 	while (head)

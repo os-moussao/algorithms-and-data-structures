@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_reverse_recursive_2.c                         :+:      :+:    :+:   */
+/*   list_reverse_head_recursion.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/08 12:45:05 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/08 12:58:42 by os-moussao       ###   ########.fr       */
+/*   Created: 2021/10/08 16:04:31 by os-moussao        #+#    #+#             */
+/*   Updated: 2021/10/08 16:42:07 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../list.h"
 
-void	list_reverse_recursive(t_node **head, t_node *prev, t_node *current, t_node *next)
+/**
+ * This is list_reverse using head recursion method, where the function will:
+ * - traverse till the end of the list
+ * - update head of the list to point to the last element
+ * - and then starts to manipulate the pointers backwards
+**/
+void	list_reverse_head_recursion(t_node **head, t_node *prev)
 {
-	if (!current)
+	t_node	*head_tmp;
+
+	if (!*head)
 	{
 		*head = prev;
 		return ;
 	}
-	next = current->next;
-	current->next = prev;
-	prev = current;
-	current = next;
-	list_reverse_recursive(head, prev, current, next);
+	head_tmp = *head;
+	*head = (*head)->next;
+	list_reverse_head_recursion(head, head_tmp);
+	head_tmp->next = prev;
 }
 
 
@@ -70,7 +77,7 @@ int	main(void)
 	printf("List:\n");
 	list_display(head);
 	printf("\nList reversed:\n");
-	list_reverse_recursive(&head, NULL, head, NULL);
+	list_reverse_head_recursion(&head, NULL);
 	list_display(head);
 
 	while (head)
