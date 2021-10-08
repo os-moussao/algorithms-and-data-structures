@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 00:08:11 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/08 11:50:22 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/08 12:20:03 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ void	list_reverse(t_node **head)
 
 	prev = NULL;
 	current = *head;
-	while (current->next)
+	while (current)
 	{
 		next = current->next;
 		current->next = prev;
 		prev = current;
 		current = next;
 	}
-	current->next = prev;
-	*head = current;
+	*head = prev;
 }
 
 
@@ -60,7 +59,6 @@ int	main(void)
 
 	head = NULL;
 	list_push_front(&head, 0);
-	list_push_front(&head, 1);
 	list_push_front(&head, 1);
 	list_push_front(&head, 2);
 	list_push_front(&head, 3);
