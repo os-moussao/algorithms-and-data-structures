@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:44:44 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/09 17:59:05 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/09 19:20:22 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	min_len_substr(char *str, char *pat)
 	int	min_len = INT_MAX;
 	int	count = 0;
 	int	start = 0;
-	int	end = 0;
+	int	end = -1;
 	int	hash_pat[26] = {0};
 	int	hash_str[26] = {0};
 
@@ -65,7 +65,7 @@ int	min_len_substr(char *str, char *pat)
 		}
 	}
 
-	return (end? min_len: -1);
+	return (end != -1? min_len: -1);
 }
 
 int	main(void)
