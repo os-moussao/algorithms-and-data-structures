@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:44:44 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/09 16:16:44 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/09 17:59:05 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	min_len_substr(char *str, char *pat)
 				min_len = window_len;
 				end = i;
 			}
+			hash_str[str[start++] - 'a']--;
+			count--;
 		}
 	}
 
