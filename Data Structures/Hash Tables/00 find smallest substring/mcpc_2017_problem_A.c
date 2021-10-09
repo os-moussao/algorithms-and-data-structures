@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   smallest_substr.c                                  :+:      :+:    :+:   */
+/*   smallest_substr_len_mcpc_2017.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 22:44:44 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/08 22:55:27 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/09 12:57:41 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,5 @@
 
 int	min_len_substr(char *s1, char *s2)
 {
-	int	len = strlen(s2);
-	int	found[len];
-	int	ans;
 
-	for (int i = 0; i < len; i++)
-		found[i] = 0;
-	for (int i = 0; s1[i]; i++)
-	{
-
-	}
 }
