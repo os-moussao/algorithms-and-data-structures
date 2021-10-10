@@ -5,41 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 21:28:41 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/10 22:22:02 by os-moussao       ###   ########.fr       */
+/*   Created: 2021/10/10 22:37:15 by os-moussao        #+#    #+#             */
+/*   Updated: 2021/10/10 22:58:37 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 
 #define ARR_SIZE 10
 
-bool	is_self_describing(long long int nbr)
+bool	is_self_describing(char *nbr)
 {
-	int	power = 10;
-	int	size = 1;
-	
-	while (nbr / power)
-	{
-		power *= 10;
-		size++;
-	}
-
-	int	hash_int[ARR_SIZE] = {0};
 	int	hash_desc[ARR_SIZE] = {0};
+	int	i = 0;
+	
+	while (nbr[i])
+		hash_desc[nbr[i++] - '0']++;
 
-	for (int i = 0; i < size; i++)
+	for (int j = 0; j < i; j++)
 	{
-		power /= 10;
-		hash_int[i] = (nbr / power) % 10;
-		hash_desc[hash_int[i]]++;
-	}
-
-	for (int i = 0; i < ARR_SIZE; i++)
-	{
-		if (hash_int[i] != hash_desc[i])
+		if ((int)(nbr[j] - '0') != hash_desc[j])
 			return (false);
 	}
 	return (true);
@@ -54,8 +40,8 @@ int	main(void)
 	bool	solution[T];
 	for (int i = 0; i < T; i++)
 	{
-		long long int	nbr;
-		scanf("%lld", &nbr);
+		char	nbr[ARR_SIZE];
+		scanf(" %[^\n]", nbr);
 		solution[i] = is_self_describing(nbr);
 	}
 	for (int i = 0; i < T; i++)
