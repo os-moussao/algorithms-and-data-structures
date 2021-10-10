@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   revstr.c                                           :+:      :+:    :+:   */
+/*   print_rev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 21:25:18 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/08 21:29:45 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/10 16:26:24 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-void	revstr(char *str)
+void	print_rev(char *str)
 {
 	if (!*str)
 		return ;
-	revstr(str + 1);
+	print_rev(str + 1);
 	printf("%c", *str);
 }
 
 int	main(void)
 {
-	revstr("1337");
+	print_rev("1337");
 }
