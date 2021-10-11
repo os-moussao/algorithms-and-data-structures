@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 14:20:57 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/11 21:45:50 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/11 23:39:36 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ pos	find_start(char **map, int rows, int cols)
 	return  (S);
 }
 
-void	min_cost_path(char **map, int rows, int cols, pos S, int cost, int *min)
+void	min_cost_path(char **map, int rows, int cols, pos S, int cost, int *min, int door_usage)
 {
 	int	r = S.i;
 	int	c = S.j;
@@ -75,22 +75,22 @@ void	min_cost_path(char **map, int rows, int cols, pos S, int cost, int *min)
 			char	value = map[r][c];
 
 			map[r][c] = '*';
-			min_cost_path(map, rows, cols, adj[i], cost + 1, min);
+			min_cost_path(map, rows, cols, adj[i], cost + 1, min, door_usage);
 			map[r][c] = value;
 		}
 	}
 	
-	if (map[r][c] == 'K')
+	if (map[r][c] == 'K' && door_usage)
 	{
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				if (map[i][j] == 'K' && !(i = r && j == c))
+				if (map[i][j] == 'K' && !(i == r && j == c))
 				{
 					map[r][c] = '*';
 					pos	adj = {i, j};
-					min_cost_path(map, rows, cols, adj, cost, min);
+					min_cost_path(map, rows, cols, adj, cost, min, door_usage - 1);
 					map[r][c] = 'K';
 				}
 			}
@@ -121,7 +121,7 @@ int	main(void)
 		}
 		
 		S = find_start(map, rows, cols);
-		min_cost_path(map, rows, cols, S, 0, &min_cost);
+		min_cost_path(map, rows, cols, S, 0, &min_cost, 1);
 		solution[i] = min_cost;
 	}
 
