@@ -6,14 +6,14 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 22:37:15 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/10 22:58:37 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/11 13:42:09 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdbool.h>
 
-#define ARR_SIZE 10
+#define ARR_SIZE 11
 
 bool	is_self_describing(char *nbr)
 {
