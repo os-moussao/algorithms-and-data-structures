@@ -6,14 +6,13 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 14:20:57 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/11 17:53:52 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/11 21:45:50 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <limits.h>
 #include <stdbool.h>
 
 typedef struct	s_pos
@@ -51,55 +50,49 @@ pos	find_start(char **map, int rows, int cols)
 
 void	min_cost_path(char **map, int rows, int cols, pos S, int cost, int *min)
 {
+	int	r = S.i;
+	int	c = S.j;
+
+	if (map[r][c] == 'T')
+	{
+		if (cost < *min || *min == -1)
+			*min = cost;
+		return ;
+	}
+
 	pos	adj[4] =
 	{
-		{S.i - 1, S.j},
-		{S.i + 1, S.j},
-		{S.i, S.j + 1},
-		{S.i, S.j - 1}
+		{r - 1, c},
+		{r + 1, c},
+		{r, c + 1},
+		{r, c - 1}
 	};
 
-	for (int a = 0; a < 4; a++)
+	for (int i = 0; i < 4; i++)
 	{
-		if (is_valid_adj(map, adj[a], rows, cols))
+		if (is_valid_adj(map, adj[i], rows, cols))
 		{
-			int		sr = S.i;
-			int		sc = S.j;
-			char	ch = map[sr][sc];
+			char	value = map[r][c];
 
-			if (ch == '.')
+			map[r][c] = '*';
+			min_cost_path(map, rows, cols, adj[i], cost + 1, min);
+			map[r][c] = value;
+		}
+	}
+	
+	if (map[r][c] == 'K')
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
 			{
-				map[sr][sc] = '*';
-				min_cost_path(map, rows, cols, adj[a], cost + 1, min);
-				map[sr][sc] = ch;
-			}
-			else if (ch == 'K')
-			{
-				// treat it as a '.'
-				map[sr][sc] = '*';
-				min_cost_path(map, rows, cols, adj[a], cost + 1, min);
-				map[sr][sc] = ch;
-
-				// find another 'K'
-				for (int i = 0; i < rows; i++)
+				if (map[i][j] == 'K' && !(i = r && j == c))
 				{
-					for (int j = 0; j < cols; j++)
-					{
-						if (map[i][j] == 'K' && i != sr && j != sc)
-						{
-							map[sr][sc] = '*';
-							pos	adj = {i, j};
-							min_cost_path(map, rows, cols, adj, cost, min);
-							map[sr][sc] = ch;
-						}
-					}
+					map[r][c] = '*';
+					pos	adj = {i, j};
+					min_cost_path(map, rows, cols, adj, cost, min);
+					map[r][c] = 'K';
 				}
-			}
-			else if (map[sr][sc] == 'T')
-			{
-				if (cost < *min)
-					*min = cost;
-				return ;
 			}
 		}
 	}
@@ -107,7 +100,7 @@ void	min_cost_path(char **map, int rows, int cols, pos S, int cost, int *min)
 
 int	main(void)
 {
-	int	T;
+	int		T;
 
 	scanf("%d", &T);
 
@@ -115,17 +108,18 @@ int	main(void)
 	for (int i = 0; i < T; i++)
 	{
 		int		rows, cols;
-		int		min_cost = INT_MAX;
+		int		min_cost = -1;
 		char	**map;
 		pos		S;
 
 		scanf("%d %d", &rows, &cols);
-		map = malloc(rows * sizeof(rows));
+		map = malloc(rows * sizeof(char *));
 		for (int j = 0; j < rows; j++)
 		{
 			map[j] = malloc(cols);
-			scanf(" %[^\n]", map[j]);
+			scanf(" %[^\n]%*c", map[j]);
 		}
+		
 		S = find_start(map, rows, cols);
 		min_cost_path(map, rows, cols, S, 0, &min_cost);
 		solution[i] = min_cost;
