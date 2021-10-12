@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 00:41:26 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/12 13:47:12 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/12 16:57:52 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,10 @@ typedef struct	s_pos
 	int	j;
 }				t_pos;
 
-bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos pos)
-{
-	for (int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < cols; j++)
-		{
-			if (map[i][j] >= 1 && map[i][j] <= 9)
-			{
-				ball->i = pos->i = i;
-				ball->j = pos->j = j;
-				return (true);
-			}
-		}
-	}
-	return (false);
-}
+void	put_map(char **map, int rows, int cols);
+bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos);
 
-bool	is_valid_direction(char **map, t_pos pos, t_pos adj, int rows, int cols)
+bool	is_valid_direction(char **map, char **sol, t_pos pos, t_pos adj, int rows, int cols)
 {
 	int	ai = adj.i;
 	int	aj = adj.j;
@@ -56,8 +42,12 @@ bool	is_valid_direction(char **map, t_pos pos, t_pos adj, int rows, int cols)
 	if (ai < 0 || ai >= rows || aj < 0 || aj >= cols)
 		return (false);
 
+	// path crossed test
+	if (sol[ai][aj] != EMPTHY)
+		return (false);
+
 	// water test
-	if (map[ai][aj] = WATER)
+	if (map[ai][aj] == WATER)
 	{
 		int	pi = pos.i;
 		int	pj = pos.j;
@@ -65,7 +55,7 @@ bool	is_valid_direction(char **map, t_pos pos, t_pos adj, int rows, int cols)
 		int	next_j = 2 * aj - pj;
 
 		if (next_i < 0 || next_i >= rows || next_j < 0 || next_j >= cols)
-			return (false)
+			return (false);
 	}
 
 	return (true);
@@ -77,9 +67,8 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 	int	pj = pos.j;
 	int	bi = ball.i;
 	int	bj = ball.j;
-	int	count = map[bj][bi] - '0';
-
-	if (map[bj][bi] == '0' || map[pi][pj] == HOLE)
+	
+	if (map[bi][bj] == '0' || map[pi][pj] == HOLE)
 	{
 		if (map[pi][pj] != HOLE)
 			return (false);
@@ -91,26 +80,40 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 
 	t_pos	adj[4] =
 	{
-		{r - 1, c},	// UP
-		{r + 1, c},	// DOWN
-		{r, c + 1},	// RIGHT
-		{r, c - 1}	// LEFT
+		{pi - 1, pj},	// UP
+		{pi + 1, pj},	// DOWN
+		{pi, pj + 1},	// RIGHT
+		{pi, pj - 1}	// LEFT
 	};
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (is_valid_direction(map, pos, adj[i], rows, cols))
+		if (is_valid_direction(map, sol, pos, adj[i], rows, cols))
 		{
 			char	direction = (i == 0)? UP: (i == 1)? DOWN: (i == 2)? RIGHT: LEFT;
+			t_pos	next = adj[i];
 			
-			map[bj][bi]--;
 			sol[pi][pj] = direction;
-			if (solve_puzzle(map, sol, rows, cols, ball, adj[i]))
-				return (true);
-			map[bj][bi]++;
+			map[bi][bj]--;
+			if (map[next.i][next.j] == WATER)
+			{
+				next = (t_pos){2 * next.i - pi, 2 * next.j - pj};
+				sol[adj[i].i][adj[i].j] = direction;
+				if (solve_puzzle(map, sol, rows, cols, ball, next))
+					return (true);
+				sol[adj[i].i][adj[i].j] = EMPTHY;
+			}
+			else
+			{
+				if (solve_puzzle(map, sol, rows, cols, ball, next))
+					return (true);
+			}
 			sol[pi][pj] = EMPTHY;
+			map[bi][bj]++;
 		}
 	}
+
+	return (false);
 }
 
 int	main(void)
@@ -131,5 +134,37 @@ int	main(void)
 		for (int j = 0; j < width; j++)
 			sol[i][j] = '.';
     }
-    return 0;
+	t_pos	ball;
+	next_ball(map, height, width, &ball, &ball);
+	solve_puzzle(map, sol, height, width, ball, ball);
+	printf("Result:\n");
+	put_map(sol, height, width);
+    return (0);
+}
+
+bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			if (map[i][j] >= '1' && map[i][j] <= '9')
+			{
+				ball->i = pos->i = i;
+				ball->j = pos->j = j;
+				return (true);
+			}
+		}
+	}
+	return (false);
+}
+
+void	put_map(char **map, int rows, int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+			printf("%c", map[i][j]);
+		printf("\n");
+	}
 }
