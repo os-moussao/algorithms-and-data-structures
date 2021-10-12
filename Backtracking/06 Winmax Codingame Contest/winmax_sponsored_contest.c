@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 00:41:26 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/12 17:44:58 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/12 20:44:08 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #define WATER 'X'
 #define HOLE 'H'
 #define USED_HOLE '*'
+#define USED_BALL '0'
 
 typedef struct	s_pos
 {
@@ -43,8 +44,8 @@ bool	is_valid_direction(char **map, char **sol, t_pos pos, t_pos adj, int rows, 
 	if (ai < 0 || ai >= rows || aj < 0 || aj >= cols)
 		return (false);
 
-	// path crossed or used hole test
-	if (sol[ai][aj] != EMPTHY || map[ai][aj] == USED_HOLE)
+	// path crossed or used hole or another ball test
+	if (sol[ai][aj] != EMPTHY || map[ai][aj] == USED_HOLE || (map[ai][aj] >= '0' && map[ai][aj] <= '9'))
 		return (false);
 
 	// water test
@@ -74,9 +75,18 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 	{
 		if (map[pi][pj] != HOLE)
 			return (false);
+
+		char	left = map[bi][bj];
 		map[pi][pj] = USED_HOLE;
+		map[bi][bj] = USED_BALL;
 		if (next_ball(map, rows, cols, &ball, &pos))
-			return solve_puzzle(map, sol, rows, cols, ball, pos);
+		{
+			if (solve_puzzle(map, sol, rows, cols, ball, pos))
+				return (true);
+			map[pi][pj] = HOLE;
+			map[bi][bj] = left;
+			return (false);
+		}
 		else
 			return (true);
 	}
@@ -84,8 +94,8 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 	t_pos	adj[4] =
 	{
 		{pi - 1, pj},	// UP
-		{pi + 1, pj},	// DOWN
 		{pi, pj + 1},	// RIGHT
+		{pi + 1, pj},	// DOWN
 		{pi, pj - 1}	// LEFT
 	};
 
@@ -93,7 +103,7 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 	{
 		if (is_valid_direction(map, sol, pos, adj[i], rows, cols))
 		{
-			char	direction = (i == 0)? UP: (i == 1)? DOWN: (i == 2)? RIGHT: LEFT;
+			char	direction = (i == 0)? UP: (i == 1)? RIGHT: (i == 2)? DOWN: LEFT;
 			t_pos	next = adj[i];
 			
 			sol[pi][pj] = direction;
@@ -140,7 +150,6 @@ int	main(void)
 	t_pos	ball;
 	next_ball(map, height, width, &ball, &ball);
 	solve_puzzle(map, sol, height, width, ball, ball);
-	printf("Result:\n");
 	put_map(sol, height, width);
     return (0);
 }
