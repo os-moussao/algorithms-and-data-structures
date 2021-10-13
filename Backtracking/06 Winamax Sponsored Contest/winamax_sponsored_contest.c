@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   winmax_sponsored_contest.c                         :+:      :+:    :+:   */
+/*   winamax_sponsored_contest.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 00:41:26 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/13 18:13:06 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/13 22:07:47 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ typedef struct	s_direction
 	t_pos	pos;
 	char	direction;
 }				t_direction;
+
+/*
+char	ans[5][5] = 
+{
+	"v....",
+	"v...<",
+	"v^..^",
+	"v^.^^",
+	">>>^."
+};
+
+bool	equal(char **sol, char ans[][5])
+{
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			if (sol[i][j] != ans[i][j])
+				return (false);
+		}
+	}
+	return (true);
+}
+*/
 
 void	put_map(char **map, int rows, int cols);
 bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos);
@@ -69,6 +93,7 @@ bool	is_valid_direction(char **map, char **sol, t_pos pos, t_pos adj, int rows, 
 	}
 
 	// if all test are passed, then it's a valid adjacent
+	
 	return (true);
 }
 
@@ -101,10 +126,10 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 
 	t_direction	move[4] =
 	{
+		{{pi, pj - 1}, LEFT},
 		{{pi + 1, pj}, DOWN},
-		{{pi - 1, pj}, UP},
 		{{pi, pj + 1}, RIGHT},
-		{{pi, pj - 1}, LEFT}
+		{{pi - 1, pj}, UP}
 	};
 
 	for (int i = 0; i < 4; i++)
@@ -115,8 +140,9 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 			t_pos	next = move[i].pos;
 			bool	changed;
 			
+			changed = (sol[prev.i][prev.j] != direction);
 			sol[pi][pj] = direction;
-			if ((changed = (sol[prev.i][prev.j] != direction)))
+			if (changed)
 				map[bi][bj]--;
 			if (map[next.i][next.j] == WATER)
 			{
