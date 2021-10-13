@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 00:41:26 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/12 20:44:08 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/13 18:13:06 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef struct	s_pos
 	int	j;
 }				t_pos;
 
+typedef struct	s_direction
+{
+	t_pos	pos;
+	char	direction;
+}				t_direction;
+
 void	put_map(char **map, int rows, int cols);
 bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos);
 
@@ -51,20 +57,22 @@ bool	is_valid_direction(char **map, char **sol, t_pos pos, t_pos adj, int rows, 
 	// water test
 	if (map[ai][aj] == WATER)
 	{
-		int	pi = pos.i;
-		int	pj = pos.j;
-		int	next_i = 2 * ai - pi;
-		int	next_j = 2 * aj - pj;
+		int		pi = pos.i;
+		int		pj = pos.j;
+		t_pos	next = (t_pos){2 * ai - pi, 2 * aj - pj};
 
-		if (next_i < 0 || next_i >= rows || next_j < 0 || next_j >= cols)
+		/*	
+		if (next.i < 0 || next.i >= rows || next.j < 0 || next.j >= cols)
 			return (false);
+		*/
+		return is_valid_direction(map, sol, adj, next, rows, cols);
 	}
 
 	// if all test are passed, then it's a valid adjacent
 	return (true);
 }
 
-bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos pos)
+bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos prev, t_pos pos)
 {
 	int	pi = pos.i;
 	int	pj = pos.j;
@@ -81,7 +89,7 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 		map[bi][bj] = USED_BALL;
 		if (next_ball(map, rows, cols, &ball, &pos))
 		{
-			if (solve_puzzle(map, sol, rows, cols, ball, pos))
+			if (solve_puzzle(map, sol, rows, cols, ball, ball, pos))
 				return (true);
 			map[pi][pj] = HOLE;
 			map[bi][bj] = left;
@@ -91,38 +99,41 @@ bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos 
 			return (true);
 	}
 
-	t_pos	adj[4] =
+	t_direction	move[4] =
 	{
-		{pi - 1, pj},	// UP
-		{pi, pj + 1},	// RIGHT
-		{pi + 1, pj},	// DOWN
-		{pi, pj - 1}	// LEFT
+		{{pi + 1, pj}, DOWN},
+		{{pi - 1, pj}, UP},
+		{{pi, pj + 1}, RIGHT},
+		{{pi, pj - 1}, LEFT}
 	};
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (is_valid_direction(map, sol, pos, adj[i], rows, cols))
+		if (is_valid_direction(map, sol, pos, move[i].pos, rows, cols))
 		{
-			char	direction = (i == 0)? UP: (i == 1)? RIGHT: (i == 2)? DOWN: LEFT;
-			t_pos	next = adj[i];
+			char	direction = move[i].direction;
+			t_pos	next = move[i].pos;
+			bool	changed;
 			
 			sol[pi][pj] = direction;
-			map[bi][bj]--;
+			if ((changed = (sol[prev.i][prev.j] != direction)))
+				map[bi][bj]--;
 			if (map[next.i][next.j] == WATER)
 			{
 				next = (t_pos){2 * next.i - pi, 2 * next.j - pj};
-				sol[adj[i].i][adj[i].j] = direction;
-				if (solve_puzzle(map, sol, rows, cols, ball, next))
+				sol[move[i].pos.i][move[i].pos.j] = direction;
+				if (solve_puzzle(map, sol, rows, cols, ball, pos, next))
 					return (true);
-				sol[adj[i].i][adj[i].j] = EMPTHY;
+				sol[move[i].pos.i][move[i].pos.j] = EMPTHY;
 			}
 			else
 			{
-				if (solve_puzzle(map, sol, rows, cols, ball, next))
+				if (solve_puzzle(map, sol, rows, cols, ball, pos, next))
 					return (true);
 			}
 			sol[pi][pj] = EMPTHY;
-			map[bi][bj]++;
+			if (changed)
+				map[bi][bj]++;
 		}
 	}
 
@@ -149,7 +160,7 @@ int	main(void)
     }
 	t_pos	ball;
 	next_ball(map, height, width, &ball, &ball);
-	solve_puzzle(map, sol, height, width, ball, ball);
+	solve_puzzle(map, sol, height, width, ball, ball, ball);
 	put_map(sol, height, width);
     return (0);
 }
