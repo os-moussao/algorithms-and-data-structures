@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 00:41:26 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/14 01:34:11 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/14 02:05:28 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct	s_direction
 	char	direction;
 }				t_direction;
 
+unsigned int	g_solution_count = 1;
+
 void	copy_ans(char **ans, char **sol, int rows, int cols);
 void	put_map(char **map, int rows);
 bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos);
@@ -60,7 +62,7 @@ void	solve_puzzle(char **map, char **sol, char **ans, int cost, int *min_cost, i
 			solve_puzzle(map, sol, ans, cost, min_cost, rows, cols, ball, ball, pos);
 		else
 		{
-			printf("\ncost: %d\n", cost);
+			printf("\nSolution #%d - Shots taken: %d\n", g_solution_count++, cost);
 			put_map(sol, rows);
 			if (cost < *min_cost)
 			{
@@ -143,8 +145,10 @@ int	main(void)
 	int		min_cost = INT_MAX;
 	next_ball(map, height, width, &ball, &ball);
 	solve_puzzle(map, sol, ans, 0, &min_cost, height, width, ball, ball, ball);
+	/*
 	printf("\nResult:\n");
 	put_map(ans, height);
+	*/
     return (0);
 }
 
