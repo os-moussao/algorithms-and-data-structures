@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 00:41:26 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/13 22:07:47 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/14 01:34:11 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #define UP '^'
 #define DOWN 'v'
@@ -38,32 +39,114 @@ typedef struct	s_direction
 	char	direction;
 }				t_direction;
 
-/*
-char	ans[5][5] = 
-{
-	"v....",
-	"v...<",
-	"v^..^",
-	"v^.^^",
-	">>>^."
-};
+void	copy_ans(char **ans, char **sol, int rows, int cols);
+void	put_map(char **map, int rows);
+bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos);
+bool	is_valid_direction(char **map, char **sol, t_pos pos, t_pos adj, int rows, int cols);
 
-bool	equal(char **sol, char ans[][5])
+void	solve_puzzle(char **map, char **sol, char **ans, int cost, int *min_cost, int rows, int cols, t_pos ball, t_pos prev, t_pos pos)
 {
-	for (int i = 0; i < 5; i++)
+	int	pi = pos.i;
+	int	pj = pos.j;
+	int	bi = ball.i;
+	int	bj = ball.j;
+
+	if (map[pi][pj] == HOLE)
 	{
-		for (int j = 0; j < 5; j++)
+		char	shots = map[bi][bj];
+		map[pi][pj] = USED_HOLE;
+		map[bi][bj] = USED_BALL;
+		if (next_ball(map, rows, cols, &ball, &pos))
+			solve_puzzle(map, sol, ans, cost, min_cost, rows, cols, ball, ball, pos);
+		else
 		{
-			if (sol[i][j] != ans[i][j])
-				return (false);
+			printf("\ncost: %d\n", cost);
+			put_map(sol, rows);
+			if (cost < *min_cost)
+			{
+				(*min_cost) = cost;
+				copy_ans(ans, sol, rows, cols);
+			}
+		}
+		map[pi][pj] = HOLE;
+		map[bi][bj] = shots;
+		return ;
+	}
+
+	t_direction	move[4] =
+	{
+		{{pi + 1, pj}, DOWN},
+		{{pi - 1, pj}, UP},
+		{{pi, pj + 1}, RIGHT},
+		{{pi, pj - 1}, LEFT}
+	};
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (is_valid_direction(map, sol, pos, move[i].pos, rows, cols))
+		{
+			char	direction = move[i].direction;
+			t_pos	next = move[i].pos;
+			bool	changed;
+			
+			changed = (sol[prev.i][prev.j] != direction);
+			if (changed)
+			{
+				if (map[bi][bj] == '0')
+					continue ;
+				else
+					map[bi][bj]--,
+					cost++;
+			}
+			sol[pi][pj] = direction;
+			if (map[next.i][next.j] == WATER)
+			{
+				next = (t_pos){2 * next.i - pi, 2 * next.j - pj};
+				sol[move[i].pos.i][move[i].pos.j] = direction;
+				solve_puzzle(map, sol, ans, cost, min_cost, rows, cols, ball, pos, next);
+				
+				// Backtrack
+				sol[move[i].pos.i][move[i].pos.j] = EMPTHY;
+			}
+			else
+				solve_puzzle(map, sol, ans, cost, min_cost, rows, cols, ball, pos, next);
+			
+			// Backtrack
+			sol[pi][pj] = EMPTHY;
+			if (changed)
+				map[bi][bj]++, cost--;
 		}
 	}
-	return (true);
 }
-*/
 
-void	put_map(char **map, int rows, int cols);
-bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos);
+int	main(void)
+{
+    int		width;
+    int		height;
+	char	**map, **sol, **ans;
+
+    scanf("%d%d", &width, &height);
+    
+	map = malloc(height * sizeof(char *));
+	sol = malloc(height * sizeof(char *));
+	ans = malloc(height * sizeof(char *));
+	for (int i = 0; i < height; i++)
+	{
+		map[i] = calloc(width + 1, 1);
+		sol[i] = calloc(width + 1, 1);
+		ans[i] = calloc(width + 1, 1);
+        scanf("%s", map[i]);
+		for (int j = 0; j < width; j++)
+			sol[i][j] = ans[i][j] = '.';
+    }
+	t_pos	ball;
+	int		min_cost = INT_MAX;
+	next_ball(map, height, width, &ball, &ball);
+	solve_puzzle(map, sol, ans, 0, &min_cost, height, width, ball, ball, ball);
+	printf("\nResult:\n");
+	put_map(ans, height);
+    return (0);
+}
 
 bool	is_valid_direction(char **map, char **sol, t_pos pos, t_pos adj, int rows, int cols)
 {
@@ -97,100 +180,6 @@ bool	is_valid_direction(char **map, char **sol, t_pos pos, t_pos adj, int rows, 
 	return (true);
 }
 
-bool	solve_puzzle(char **map, char **sol, int rows, int cols, t_pos ball, t_pos prev, t_pos pos)
-{
-	int	pi = pos.i;
-	int	pj = pos.j;
-	int	bi = ball.i;
-	int	bj = ball.j;
-	
-	if (map[bi][bj] == '0' || map[pi][pj] == HOLE)
-	{
-		if (map[pi][pj] != HOLE)
-			return (false);
-
-		char	left = map[bi][bj];
-		map[pi][pj] = USED_HOLE;
-		map[bi][bj] = USED_BALL;
-		if (next_ball(map, rows, cols, &ball, &pos))
-		{
-			if (solve_puzzle(map, sol, rows, cols, ball, ball, pos))
-				return (true);
-			map[pi][pj] = HOLE;
-			map[bi][bj] = left;
-			return (false);
-		}
-		else
-			return (true);
-	}
-
-	t_direction	move[4] =
-	{
-		{{pi, pj - 1}, LEFT},
-		{{pi + 1, pj}, DOWN},
-		{{pi, pj + 1}, RIGHT},
-		{{pi - 1, pj}, UP}
-	};
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (is_valid_direction(map, sol, pos, move[i].pos, rows, cols))
-		{
-			char	direction = move[i].direction;
-			t_pos	next = move[i].pos;
-			bool	changed;
-			
-			changed = (sol[prev.i][prev.j] != direction);
-			sol[pi][pj] = direction;
-			if (changed)
-				map[bi][bj]--;
-			if (map[next.i][next.j] == WATER)
-			{
-				next = (t_pos){2 * next.i - pi, 2 * next.j - pj};
-				sol[move[i].pos.i][move[i].pos.j] = direction;
-				if (solve_puzzle(map, sol, rows, cols, ball, pos, next))
-					return (true);
-				sol[move[i].pos.i][move[i].pos.j] = EMPTHY;
-			}
-			else
-			{
-				if (solve_puzzle(map, sol, rows, cols, ball, pos, next))
-					return (true);
-			}
-			sol[pi][pj] = EMPTHY;
-			if (changed)
-				map[bi][bj]++;
-		}
-	}
-
-	return (false);
-}
-
-int	main(void)
-{
-    int		width;
-    int		height;
-	char	**map, **sol;
-
-    scanf("%d%d", &width, &height);
-    
-	map = malloc(height * sizeof(char *));
-	sol = malloc(height * sizeof(char *));
-	for (int i = 0; i < height; i++)
-	{
-		map[i] = calloc(width + 1, 1);
-		sol[i] = calloc(width + 1, 1);
-        scanf("%s", map[i]);
-		for (int j = 0; j < width; j++)
-			sol[i][j] = '.';
-    }
-	t_pos	ball;
-	next_ball(map, height, width, &ball, &ball);
-	solve_puzzle(map, sol, height, width, ball, ball, ball);
-	put_map(sol, height, width);
-    return (0);
-}
-
 bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos)
 {
 	for (int i = 0; i < rows; i++)
@@ -208,12 +197,16 @@ bool	next_ball(char **map, int rows, int cols, t_pos *ball, t_pos *pos)
 	return (false);
 }
 
-void	put_map(char **map, int rows, int cols)
+void	put_map(char **map, int rows)
 {
 	for (int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < cols; j++)
-			printf("%c", map[i][j]);
-		printf("\n");
-	}
+		printf("%s\n", map[i]);
 }
+
+void	copy_ans(char **ans, char **sol, int rows, int cols)
+{
+	for (int i = 0; i < rows; i++)
+		for (int j = 0; j < cols; j++)
+			ans[i][j] = sol[i][j];
+}
+
