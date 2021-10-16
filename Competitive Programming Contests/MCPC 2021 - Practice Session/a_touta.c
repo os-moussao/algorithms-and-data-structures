@@ -3,6 +3,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+/**
+ * RUNTIME ERROR
+**/
+
+
 int	main(void)
 {
 	char	buff[1000];
@@ -33,7 +38,7 @@ int	main(void)
 		
 		a = strtol(strA, &endA, 10);
 		b = strtol(strB, &endB, 10);
-		printf("a = %lld b = %lld	a+b = %lld a*b =%lld\n", a + b, a * b);
+		//printf("a = %lld b = %lld	a+b = %lld a*b =%lld\n", a + b, a * b);
 		printf("Plate %d\n", a + b> a*b? 1: 2);
 	}
 }
