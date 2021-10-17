@@ -8,13 +8,18 @@
 
 int	main(void)
 {
-	FILE	*fp = freopen("input.in", "r", stdin);
+	FILE	*in = freopen("f.in", "r", stdin);
+	FILE	*out = freopen("f.out", "w", stdout);
 	int	T;
 
 	scanf("%d", &T);
 	while (T-- > 0)
 	{
-		// process
+		int	a, b;
+
+		scanf("%d%d", &a, &b);
+		printf("%d\n", a+b);
 	}
-	fclose(fp);
+	fclose(in);
+	fclose(out);
 }
