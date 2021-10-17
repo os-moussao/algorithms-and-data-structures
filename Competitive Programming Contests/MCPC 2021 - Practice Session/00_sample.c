@@ -8,19 +8,13 @@
 
 int	main(void)
 {
-	char	buff[1000];
-	int		fd = open("eat.in", O_RDONLY);
-	read(fd, buff, 1000);
-	int		T = 0;
+	FILE	*fp = freopen("input.in", "r", stdin);
+	int	T;
 
-	// read number of tests from the 1st line
-	int i = 0;
-	while (buff[i] && buff[i] != '\n')
-		T =T * 10 + (buff[i++] - '0');
-
+	scanf("%d", &T);
 	while (T-- > 0)
 	{
-		// read remaining lines from the file
+		// process
 	}
+	fclose(fp);
 }
-
