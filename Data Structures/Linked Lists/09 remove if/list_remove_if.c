@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:28:33 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/20 10:22:54 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/20 11:07:20 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	list_remove_if(t_node **head, int data_ref)
 		(*head) = (*head)->next;
 		free(to_free);
 	}
+
+	if (!(*head))
+		return ;
 
 	// if data_ref is in the middle or at the end of the list
 	prev = (*head);
