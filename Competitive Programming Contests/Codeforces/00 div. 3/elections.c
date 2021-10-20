@@ -25,3 +25,7 @@ int	main(void)
 		printf("%d %d %d\n", max(a, b, c), max(b, a, c), max(c, a, b));
 	}
 }
+
+/**
+ * max(0, max(b, c) + 1 - a)
+**/
