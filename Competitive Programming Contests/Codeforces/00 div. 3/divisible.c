@@ -12,20 +12,19 @@ int	solve(char *str)
 	int	i = strlen(str) - 1;
 	int	count = 0;
 
-	while (i)
+	while (1)
 	{
 		if (!nbr1 && str[i] == '5')
 			nbr1 = true, i--;
 		else if (!nbr2 && str[i] == '0')
 			nbr2 = true, i--;
 		else if (nbr1 && (str[i] == '2' || str[i] == '7'))
-			return count;
+			return count + nbr2;
 		else if (nbr2 && (str[i] == '0' || str[i] == '5'))
-			return count;
+			return count + nbr1;
 		else
 			i--, count++;
 	}
-	return count;
 }
 
 int	main(void)
