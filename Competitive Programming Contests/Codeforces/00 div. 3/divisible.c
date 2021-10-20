@@ -14,14 +14,14 @@ int	solve(char *str)
 
 	while (1)
 	{
-		if (!nbr1 && str[i] == '5')
-			nbr1 = true, i--;
-		else if (!nbr2 && str[i] == '0')
-			nbr2 = true, i--;
-		else if (nbr1 && (str[i] == '2' || str[i] == '7'))
+		if (nbr1 && (str[i] == '2' || str[i] == '7'))
 			return count + nbr2;
 		else if (nbr2 && (str[i] == '0' || str[i] == '5'))
 			return count + nbr1;
+		else if (!nbr1 && str[i] == '5')
+			nbr1 = true, i--;
+		else if (!nbr2 && str[i] == '0')
+			nbr2 = true, i--;
 		else
 			i--, count++;
 	}
