@@ -5,6 +5,7 @@
 #include <math.h>
 #include <limits.h>
 
+// merge sort from geeksforgeeks
 void merge(int arr[], int l, int m, int r)
 {
     int i, j, k;
