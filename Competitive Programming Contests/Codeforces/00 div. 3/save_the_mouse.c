@@ -5,23 +5,55 @@
 #include <math.h>
 #include <limits.h>
 
-int solve(char *arr, long long n)
+void merge(int arr[], int l, int m, int r)
 {
-	int ans = 0;
-	long long i = 0;
-
-	while (i < n)
-	{
-		long long j = n - 1;
-		while (arr[j] == 0 && j >= 0)
-			j--, i++;
-		if (j >= 0 && arr[j] && i < n)
-		{
-			arr[j]--;
-			ans++;
-		}
-	}
-	return ans;
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+  
+    int L[n1], R[n2];
+  
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+  
+    i = 0; 
+    j = 0;
+    k = l;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        }
+        else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+  
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+  
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+  
+void mergeSort(int arr[], int l, int r)
+{
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
 }
 
 int	main(void)
@@ -31,18 +63,37 @@ int	main(void)
 	scanf("%d", &T);
 	while (T-- > 0)
 	{
-		long long	n, k, i, j;
+		int	n, k;
 
-		scanf("%lld%lld", &n, &k);
-		char arr[n];
-		for (i = 0; i < n; i++)
-			arr[i] = 0;
-		for (j = 0; j < k; j++)
+		scanf("%d%d", &n, &k);
+		int arr[k];
+		for (int j = 0; j < k; j++)
+			scanf("%d", &arr[j]), arr[j] = n - arr[j];
+
+		// sort arr
+		mergeSort(arr, 0, k - 1);
+		/*
+		for (int i = 0; i < k; i++)
 		{
-			long long m;
-			scanf("%lld", &m);
-			arr[m - 1]++;
+			int sw = 0;
+			for (int j = 0; j < k - i - 1; j++)
+			{
+				if (arr[j] > arr[j + 1])
+				{
+					int tmp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = tmp;
+					sw = 1;
+				}
+			}
+			if (!sw)
+				break ;
 		}
-		printf("%d\n", solve(arr, n));
+		*/
+		int cnt = 0;
+		int sum = 0;
+		while (cnt < k && sum + arr[cnt] < n)
+			sum += arr[cnt++];
+		printf("%d\n", cnt);
 	}
 }
