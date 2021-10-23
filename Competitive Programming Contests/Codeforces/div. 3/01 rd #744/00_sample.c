@@ -7,15 +7,16 @@
 
 int	main(void)
 {
-	//FILE	*in = freopen("f.in", "r", stdin);
 	int	T;
 
 	scanf("%d", &T);
 	while (T-- > 0)
 	{
 		int	a, b;
+		char	str[100];
 
 		scanf("%d%d", &a, &b);
+		scanf(" %[^\n]%*c", str);
 		printf("%d\n", a+b);
 	}
 }
