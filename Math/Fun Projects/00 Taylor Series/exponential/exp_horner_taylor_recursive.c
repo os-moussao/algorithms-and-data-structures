@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   horner_taylor.c                                    :+:      :+:    :+:   */
+/*   exp_horner_taylor_recursive.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: os-moussao <omoussaoui040@gmail.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/09 22:38:22 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/09/11 00:00:41 by os-moussao       ###   ########.fr       */
+/*   Created: 2021/09/11 00:02:34 by os-moussao        #+#    #+#             */
+/*   Updated: 2021/10/24 23:34:54 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-double	taylor(double x, int n)
+double	exp_recursive(double x, int n, double tmp)
 {
-	double	res = 1;
+	double	res;
 
-	for (double i = n; i > 0; i--)
-		res = res * x / i + 1;
-	return (res);
+	if (n == 0)
+		return (tmp);
+	res = tmp * x / n + 1;
+	return (exp_recursive(x, n - 1, res));
+}
+
+double os_exp(double x, int n)
+{
+	return (exp_recursive(x, n, 1));
 }
 
 int	main(void)
 {
-	printf("%lf", taylor(3, 50));
+	printf("%lf\n", os_exp(4, 50));
+	printf("%lf\n", os_exp(4, 50));
 }
