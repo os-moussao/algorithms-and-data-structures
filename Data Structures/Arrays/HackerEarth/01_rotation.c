@@ -10,10 +10,9 @@ int	main(void)
 		int n, k;
 
 		scanf("%d%d", &n, &k);
-		k = k % n;
 		int	arr[n];
 		for (int i = 0; i < n; i++)
-			scanf("%d", &arr[(i + k>=n)?i + k - n: i + k]);
+			scanf("%d", &arr[(i + k) % n]);
 		for (int i = 0; i < n; i++)
 			printf("%d ", arr[i]);
 		printf("\n");
