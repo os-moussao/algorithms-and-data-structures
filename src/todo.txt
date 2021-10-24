@@ -3,3 +3,6 @@ All possible combinations in an arrray
 
 Hakerearth
 https://www.hackerearth.com/practice/codemonk/
+
+Segmented Sieve Algorithm
+https://www.geeksforgeeks.org/segmented-sieve/
