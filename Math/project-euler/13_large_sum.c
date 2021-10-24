@@ -17,11 +17,13 @@ int	main(void)
 	char	nums[100][50];
 
 	// we need an array to store the result
-	// technically size of 52 is enough
+	// technically a size of 52 is enough
+	// because a carry will never be more than 2 digits (my intuition says that)
+	// but taking more than enough space will never hurt :)
 	char	res[100] = {0};
 
-	// a carry will never be more than 2 digits
-	int		carry[2] = {0};
+	// a variable to store the carry
+	int		carry = 0;
 
 	// the numbers are so big to split by hand
 	// so better to put them in a file and read from the file
@@ -29,31 +31,28 @@ int	main(void)
 	for (int i = 0; i < 100; i++)
 		scanf(" %[^\n]%*c", nums[i]);
 
-	// add each column and update the result
+	// add numbers of each column and update the result
 	for (int j = 49; j >= 0; j--)
 	{
-		int sum = 0;
+		// add carry
+		int sum = carry;
 
 		// count sum
 		for (int i = 0; i < 100; i++)
 			sum += nums[i][j] - '0';
 
-		// add the carry
-		sum += carry[0] + 10 * carry[1];
-
-		// put the first digit in result
+		// push the first digit to result
 		res_push(res, sum % 10);
 
 		// update the carry
-		carry[0] = (sum / 10) % 10;
-		carry[1] = (sum / 100) % 10;
-
-		// add the carry to result in the last column
-		if (j == 0)
-			res_push(res, carry[0]), res_push(res, carry[1]);
+		carry = sum / 10;
 	}
 
-	// result
+	// finally add the carry
+	while (carry)
+		res_push(res, carry % 10), carry /= 10;
+
+	// print result
 	printf("%s\n", res);
 	fclose(fp);
 }
