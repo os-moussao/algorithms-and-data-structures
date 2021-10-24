@@ -30,5 +30,11 @@ CS50:
 Coursera:
 	https://www.coursera.org/learn/what-is-a-proof  (Mathematical thinking in computer science - a fun course)
 
+Books:
+	https://cses.fi/book/index.php (a great book - and it's free)
+
+For more problem solving:
+	https://cses.fi/problemset/
+
 git:
 	https://www.tecmint.com/fix-git-user-credentials-for-https/
