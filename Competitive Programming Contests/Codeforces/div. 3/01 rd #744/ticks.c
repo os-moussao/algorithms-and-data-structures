@@ -5,6 +5,28 @@
 #include <math.h>
 #include <limits.h>
 
+/*
+bool	all_vis(char *vis, int rows, int cols)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for ( int j = 0; j < cols; j++)
+		{
+			if (!vis[i][j])
+				return (false);
+		}
+	}
+	return (true);
+}
+
+bool	solve(int *bd, int *vis, int rows, int cols, int i, int j, int min, int k)
+{
+	if (all_vis(vis, rows, cols))
+		return (min >= k);
+
+	
+}
+*/
 int	main(void)
 {
 	int	T;
@@ -15,37 +37,56 @@ int	main(void)
 		int	n, m, k, ans = 1;
 		scanf("%d%d%d", &n, &m, &k);
 
-		char	f[n][m];
-		char	x[n][m];
+		char	bd[n][m];
+		char	vis[n][m];
 		for (int i = 0; i < n; i++)
 		{
-			scanf(" %[^\n]%*c", f[i]);
+			scanf(" %[^\n]%*c", bd[i]);
 			for (int j = 0; j < m; j++)
-				x[i][j] = 0;
+				vis[i][j] = (bd[i][j] == '.');
 		}
 
+		bool	stop = false;
 		for (int i = n - 1; i >= 0; i--)
 		{
 			for (int j = 0; j < m; j++)
 			{
-				if (f[i][j] == '*')
+				if (bd[i][j] == '*')
 				{
-					int size = 0;
-					for (int d = 1; d < i; d++)
+					int 	size = 0;
+					bool	tick_visited = true;
+
+					if (!vis[i][j])
+						tick_visited == false;
+
+					vis[i][j] = 1;
+
+					for (int d = 1; d <= i; d++)
 					{
-						if (f[i - d][j - d] == '*' && f[i - d][j + d] == '*')
+						if (bd[i - d][j - d] == '*' && bd[i - d][j + d] == '*')
 						{
+							if (!vis[i - d][j - d] || !vis[i - d][j + d])
+								tick_visited = false;
+
+							vis[i - d][j - d] = vis[i - d][j + d] = 1;
+
 							size++;
-							x[i - d][j - d] = x[i - d][j + d] = 1;
 						}
 						else
 							break ;
 					}
-					if (size < k || (size == 0 && !x[i][j]))
-						ans = 0;
+
+					if (size < k && !tick_visited)
+					{
+						stop = true;
+						break ;
+					}
 				}
+				if (stop)
+					break ;
 			}
 		}
-		printf("%s\n", ans?"YES":"NO");
+		if (!stop)
+			printf("YES\n");
 	}
 }
