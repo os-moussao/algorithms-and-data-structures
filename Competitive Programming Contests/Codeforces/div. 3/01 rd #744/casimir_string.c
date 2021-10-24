@@ -18,7 +18,7 @@ int	main(void)
 		int	l = strlen(str);
 		int cnt = 0;
 		for (int i = 0; i < l; i++)
-			cnt += (str[i] == 'A' || str[i] == 'C') - (str[i] == 'B');
+			cnt += (str[i] == 'B')? 1: -1;
 		printf("%s\n", cnt?"NO":"YES");
 	}
 }
