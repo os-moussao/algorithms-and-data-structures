@@ -1,0 +1,5 @@
+casimir string (A): Accepted
+shifting sort (B): Accepted
+ticks (C): Accepted
+
+contest: https://codeforces.com/contest/1579
