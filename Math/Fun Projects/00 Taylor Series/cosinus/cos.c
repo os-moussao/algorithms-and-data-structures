@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 00:01:48 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/27 00:20:51 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/27 00:27:47 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double	modulo(double a, double b)
 }
 
 /*
- * Implementing cosine function using its taylor series expantion
+ * Implementing cosine function using its taylor series expansion
  * cos(x) = sigma n: (-1)^n * x^(2n) / (2n)!
  * (for n ranging from 0 to the wanted precision (it could be +inf))
 **/	
