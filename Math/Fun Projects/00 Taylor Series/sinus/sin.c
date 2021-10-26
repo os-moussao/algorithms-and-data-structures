@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 22:37:31 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/27 00:08:50 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/27 00:30:20 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ double	modulo(double a, double b)
 }
 
 /*
- * Implementing sine function using its taylor series expantion
- * sin(x) = sigma n: (-1)^n * x^(2*n+1) / (2*n+1)!
+ * Implementing sine function using its taylor series expansion
+ * sin(x) = sigma n: (-1)^n * x^(2n+1) / (2n+1)!
  * (n ranging from 0 to the wanted precision (it could be +inf))
  *
  * I could not exceed a precision of 9
