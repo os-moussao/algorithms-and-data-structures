@@ -2,7 +2,7 @@
 #include <string.h>
 
 /*
- * I first did just by calculating 2 to the power 1000
+ * I first did it just by calculating 2 to the power 1000
  * but turns out to be an extremely large number 
  * this can work in languages like python but not in C (we don't do that here hhhhhhhh)
  *
