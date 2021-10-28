@@ -1,8 +1,58 @@
 #include <stdio.h>
+#include <string.h>
+
+int	Power = 1000;
+
+void	res_push(char *res, int n)
+{
+	int	len = strlen(res);
+
+	for (int i = len; i > 0; i--)
+		res[i] = res[i - 1];
+	res[0] = n + '0';
+}
+
+int	main(void)
+{
+	char	res[1000] = {0};
+	char	replace;
+	int		carry, mult;
+	int		digit_sum = 0;
+
+	res[0] = '2';
+	for (int i = 1; i < Power; i++)
+	{
+		int	j = 0;
+		while (res[j])j++;j--;
+
+		carry = 0;
+		while (j >= 0)
+		{
+			mult = (res[j] - '0') * 2 + carry;
+			replace = mult % 10 + '0';
+			carry = mult / 10;
+			res[j] = replace;
+			j--;
+		}
+		if (carry)
+			res_push(res, carry);
+	}
+
+	for (int i = 0; res[i]; i++)
+		digit_sum += res[i] - '0';
+
+	printf("2^1000 = %s\n\n", res);
+	printf("digits = %zd\n", strlen(res));
+	printf("DIGIT SUM = %d\nQED!\n", digit_sum);
+}
 
 /*
- * power function exists in c
- * but I prefer to refresh my mind
+ * I first did just by calculating 2 to the power 1000
+ * but turns out to be an extremely large number 
+ * this can work in languages like python but not in C (we don't do that here hhhhhhhh)
+ *
+ * so I implemented the simple algorithm that every one uses to calculate a multiplication in a paper
+ * multiplying digit by digit and adding the carry along the way
 **/
 long long	power(long long b, long long p)
 {
@@ -23,10 +73,4 @@ int	sum_dig(long long nbr)
 		nbr /= 10;
 	}
 	return (sum);
-}
-
-int	main(void)
-{
-	printf("%d\n", sum_dig(power(2, 15)));
-
 }
