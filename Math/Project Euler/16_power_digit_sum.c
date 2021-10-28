@@ -10,7 +10,6 @@
  * multiplying digit by digit and adding the carry along the way
 **/
 
-
 int	Power = 1000;
 
 void	res_push(char *res, int n)
