@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 03:50:12 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/28 04:13:20 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/10/28 04:35:11 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*tens[11] = {"", "", "twenty", "thirty", "forty", "fifty", "sixty", "sevent
 
 /**
  * print number in letters
- * this function handles numbers from 0 up to a 1000
+ * this function handles numbers from 0 up to a 10000
  */
 void	convert(int n)
 {
@@ -51,7 +51,12 @@ void	convert(int n)
 		}
 	}
 	else
-		printf("one thousand");
+	{
+		convert(n / 1000);
+		printf(" thousand ");
+		if (n % 1000)
+			convert(n % 1000);
+	}
 }
 
 int	main(void)
