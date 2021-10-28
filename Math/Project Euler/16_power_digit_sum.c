@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+ * I first did just by calculating 2 to the power 1000
+ * but turns out to be an extremely large number 
+ * this can work in languages like python but not in C (we don't do that here hhhhhhhh)
+ *
+ * so I implemented the simple algorithm that every one uses to calculate a multiplication in a paper
+ * multiplying digit by digit and adding the carry along the way
+**/
+
+
 int	Power = 1000;
 
 void	res_push(char *res, int n)
@@ -46,14 +56,6 @@ int	main(void)
 	printf("DIGIT SUM = %d\nQED!\n", digit_sum);
 }
 
-/*
- * I first did just by calculating 2 to the power 1000
- * but turns out to be an extremely large number 
- * this can work in languages like python but not in C (we don't do that here hhhhhhhh)
- *
- * so I implemented the simple algorithm that every one uses to calculate a multiplication in a paper
- * multiplying digit by digit and adding the carry along the way
-**/
 long long	power(long long b, long long p)
 {
 	if (p <= 0)
