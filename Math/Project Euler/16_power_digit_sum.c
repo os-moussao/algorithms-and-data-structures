@@ -55,6 +55,7 @@ int	main(void)
 	printf("DIGIT SUM = %d\nQED!\n", digit_sum);
 }
 
+/* useless functions */
 long long	power(long long b, long long p)
 {
 	if (p <= 0)
