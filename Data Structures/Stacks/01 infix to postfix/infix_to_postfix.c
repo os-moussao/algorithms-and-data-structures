@@ -6,14 +6,14 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 20:48:21 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/31 23:57:37 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/11/01 00:15:03 by os-moussao       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../stack.h"
 #include "../stack_utils.c"
 
-int	precedence(char op)
+int precedence(char op)
 {
 	switch (op)
 	{
@@ -38,12 +38,12 @@ bool has_higher_prec(char op1, char op2)
 	return p1 > p2;
 }
 
-bool	is_operator(char c)
+bool is_operator(char c)
 {
 	return (c == '^' || c == '*' || c == '/' || c == '+' || c == '-');
 }
 
-char	*infix_to_postfix(char *exp)
+char *infix_to_postfix(char *exp)
 {
 	t_node	*stack = NULL;
 	char	*postfix = malloc(strlen(exp));
@@ -51,10 +51,10 @@ char	*infix_to_postfix(char *exp)
 
 	while (*exp)
 	{
-		if (*exp != ' ')
+		if (*exp == ' ')
 		{
 			exp++;
-			continue ;
+			continue;
 		}
 
 		if (*exp == '(')
@@ -94,7 +94,7 @@ char	*infix_to_postfix(char *exp)
 	return (postfix);
 }
 
-int	main(void)
+int main(void)
 {
 	char	expression[250];
 	char	*postfix;
