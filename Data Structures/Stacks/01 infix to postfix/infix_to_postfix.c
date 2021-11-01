@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 20:48:21 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/11/01 00:15:03 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/11/01 21:23:03 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int precedence(char op)
 		case '+':
 		case '-':
 			return 1;
+		default:
+			return 0;
 	}
 }
 
@@ -34,7 +36,7 @@ bool has_higher_prec(char op1, char op2)
 	int p2 = precedence(op2);
 
 	if (p1 == p2)
-		return (op1 != '^');
+		return (op1 == '^');
 	return p1 > p2;
 }
 
