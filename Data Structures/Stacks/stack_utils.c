@@ -6,7 +6,7 @@
 /*   By: os-moussao <omoussao@student.1337.ma>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 21:24:37 by os-moussao        #+#    #+#             */
-/*   Updated: 2021/10/29 23:42:56 by os-moussao       ###   ########.fr       */
+/*   Updated: 2021/11/01 21:45:50 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void	stack_push(t_node **stack, void *data, size_t data_size)
 	new->next = (*stack);
 	(*stack) = new;
 }
-/* alternative process for memcpy */
-// for (int i = 0; i < data_size; i++)
-// 	*(char *)(new->data + i) = *(char *)(data + i);
 
 void	stack_pop(t_node **stack)
 {
@@ -32,6 +29,13 @@ void	stack_pop(t_node **stack)
 	free(to_free);
 }
 
+void	stack_clear(t_node **stack)
+{
+	while (*stack)
+		stack_pop(stack);
+}
+
+/*
 void	stack_clear(t_node **stack)
 {
 	t_node	*to_free;
@@ -44,3 +48,4 @@ void	stack_clear(t_node **stack)
 		free(to_free);
 	}
 }
+*/
