@@ -20,10 +20,18 @@ int	find(int *tab, int l, int h, int size)
 
 int	main(void)
 {
-	int	tab[11] = {4, 6, 9, 12, 11, 8, 6, 4, 1, 0, -1};
-	int ans;
-	if ((ans = find(tab, 0, 10, 11)) == -1)
-		printf("no ans!! Really?!!\n");
-	else
-		printf("max = %d\n", tab[ans]);
+	int	tabs[3][11] = 
+	{
+		{4, 6, 9, 12, 11, 8, 6, 4, 1, 0, -1}, // increasing - decreasing
+		{4, 6, 7, 9, 10, 11, 12, 15, 17, 20, 33}, // increasing
+		{12, 11, 8, 6, 4, 1, 0, -1, -2, -3, -4} // decreasing
+	};
+	for (int i = 0; i < 3; i++)
+	{
+		int ans;
+		if ((ans = find(tabs[i], 0, 10, 11)) == -1)
+			printf("no ans!! Really?!!\n");
+		else
+			printf("max = %d\n", tabs[i][ans]);
+	}
 }
