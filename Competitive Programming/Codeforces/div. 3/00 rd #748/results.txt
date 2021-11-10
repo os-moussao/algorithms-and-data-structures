@@ -1,5 +1,0 @@
-elections (A): Accepted
-make it divisible by 25 (B): Accepted
-save more mice (C): Accepted
-
-contest: https://codeforces.com/contest/1593

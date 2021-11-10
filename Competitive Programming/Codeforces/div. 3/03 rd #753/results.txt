@@ -1,4 +1,0 @@
-(A): Accepted
-(B): (brute force) time limit
-
-context: https://codeforces.com/contest/1607
