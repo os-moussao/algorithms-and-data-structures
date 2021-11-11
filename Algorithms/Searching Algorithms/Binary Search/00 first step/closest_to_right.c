@@ -1,21 +1,21 @@
-//https://codeforces.com/edu/course/2/lesson/6/1/practice/contest/283911/problem/B
 #include <stdio.h>
+
 
 int	find(int *tab, int l, int h, int x)
 {
-	int	ans = -1;
+	int	ans = h + 1;
 
 	while (l <= h)
 	{
 		int mid = l + (h - l) / 2;
-		if (tab[mid] <= x)
-		{
-			ans = mid;
-			l = mid + 1;
-		}
-		else
+
+		if (tab[mid] >= x)
+			ans = mid,
 			h = mid - 1;
+		else
+			l = mid + 1;
 	}
+
 	return (ans + 1);
 }
 
@@ -33,3 +33,4 @@ int	main(void)
 		printf("%d\n", find(arr, 0, n - 1, x));
 	}
 }
+
