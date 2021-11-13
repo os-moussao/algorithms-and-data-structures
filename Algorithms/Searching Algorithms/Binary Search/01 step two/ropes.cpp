@@ -20,9 +20,9 @@ double	solve(int *ropes, int n, int k)
 	// --> l*h <= 1e18
 	// log2(1e18) --> 60
 	
-//	cout << setprecision(20);
-//	for (int i = 0; i < 100; i++)
-	while (h - l > eps)
+	cout << setprecision(20);
+	for (int i = 0; i < 100; i++)
+//	while (h - l > eps)
 	{
 		mid = l + (h - l) / 2;
 		if (valid(ropes, n, k, mid))
