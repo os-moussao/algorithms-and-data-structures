@@ -1,0 +1,12 @@
+The concept of matrix exponentiation (matrix to the power of n) is generally useful for finding the nth term of a linear recurrence relation in O(log(n)) time. Like finding the nth fibonacci number in logarithmic time.
+
+resources for learning this concept:
+- first, learn the concept of binary exponentiation (calculate power in logarithmic complexity):
+	- https://www.youtube.com/watch?v=L-Wzglnm4dM
+	- https://youtu.be/uBwZvr5jHAU (this guy also explains very well)
+	- https://www.youtube.com/watch?v=jkZ6c-uAl7Y (if you feel confortable)
+- second, learn the basics of matrix multiplication:
+	- https://www.mathsisfun.com/algebra/matrix-multiplying.html
+	- (feel free to check more articles/videos until you grasp the concept)
+- Matrix exponentiation:
+	- https://www.youtube.com/watch?v=eMXNWcbw75E (practice the problems in his training contest)
