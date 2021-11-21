@@ -1,0 +1,16 @@
+This method is really interesting:
+- part I:
+	great video:
+		https://www.youtube.com/watch?v=uBwZvr5jHAU
+	if you like articles - read the first part:	
+		https://cp-algorithms.com/algebra/binary-exp.html
+
+- part II:
+	you'll need to implement the fermat's little theorem
+		https://en.wikipedia.org/wiki/Fermat%27s_little_theorem (know what it is)
+	implementation:
+		https://www.youtube.com/watch?v=jkZ6c-uAl7Y
+	if you're curious about its proof, read this blog...
+	if more interested, try to proove it yourself, then read multiple proofs
+	(the combinatorial proof - proof using the binomial theorem - proof as a particulat case of Euler's theorem)
+		https://en.wikipedia.org/wiki/Proofs_of_Fermat%27s_little_theorem
