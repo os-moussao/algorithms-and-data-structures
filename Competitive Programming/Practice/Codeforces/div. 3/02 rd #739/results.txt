@@ -1,0 +1,5 @@
+pr A: Accepted
+pr B: Accepted
+pr C: Accepted
+
+contest: https://codeforces.com/contest/1560
