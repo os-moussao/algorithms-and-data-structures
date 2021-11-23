@@ -10,22 +10,14 @@ int	m = 1e9 + 7;
 
 int	power(int a, int b, int mod)
 {
-	if (b == 0)
-		return 1;
 	a %= mod;
 	int res = 1;
 	while (b > 0)
 	{
-		if (b % 2)
-		{
+		if (b & 1)
 			res = (res * a) % mod;
-			b--;
-		}
-		else
-		{
-			a = (a * a) % mod;
-			b /= 2;
-		}
+		a = (a * a) % mod;
+		b >>= 1;
 	}
 	return res;
 }
