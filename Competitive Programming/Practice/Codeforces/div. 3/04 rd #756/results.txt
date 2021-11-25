@@ -1,0 +1,2 @@
+A: Accepted
+contest: https://codeforces.com/contest/1611
