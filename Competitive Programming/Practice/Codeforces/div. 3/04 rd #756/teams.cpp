@@ -17,7 +17,7 @@ const int MOD = 1e9 + 7;
 
 // this function will segfault (cause a stack overflow) if the numbers are too high
 // O(3^n) too high
-bool valid_(int a, int b, int t)
+bool valid(int a, int b, int t)
 {
 	if (a < 0 || b < 0)
 		return 0;
@@ -29,19 +29,20 @@ bool valid_(int a, int b, int t)
 		valid(a - 1, b - 3, t - 1) || valid(a - 3, b - 1, t - 1);
 }
 
-bool valid()
-{
-	int x, y, z;
-	x = y = z = 0;
-
-
-}
-
 void solve()
 {
 	int a, b;
 	cin >> a >> b;
 
+	if (a < b) swap(a, b);
+	int k = min({a/3, b, (a-b)/2});  /*min((a - b) / 2, min(a / 3, b)) */ 
+	/*
+	while (a < 3*k || b < k && k >= 0)
+		k--;
+	*/
+	a -= 3*k; b -= k;
+	cout << min(a, b) / 2 + k << nn;
+	/*
 	int lo = 0, hi = min(a, b), mid, ans;
 
 	while (hi >= lo)
@@ -56,6 +57,7 @@ void solve()
 			hi = mid - 1;
 	}
 	cout << ans << nn;
+	*/
 }
 
 int32_t main()
