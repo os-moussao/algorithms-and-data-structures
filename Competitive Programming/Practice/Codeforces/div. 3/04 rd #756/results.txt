@@ -1,2 +1,3 @@
-A: Accepted
+A (make even): Accepted
+B (teams): Accepted
 contest: https://codeforces.com/contest/1611
