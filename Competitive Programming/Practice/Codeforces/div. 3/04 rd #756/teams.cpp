@@ -15,16 +15,26 @@ using namespace std;
 
 const int MOD = 1e9 + 7;
 
-bool valid(int a, int b, int t)
+// this function will segfault (cause a stack overflow) if the numbers are too high
+// O(3^n) too high
+bool valid_(int a, int b, int t)
 {
 	if (a < 0 || b < 0)
-		return false;
+		return 0;
+
 	if (t == 0)
-		return true;
-	if (valid(a - 2, b - 2, t - 1))
-		return true;
-	else
-		return valid(max(a, b) - 3, min(a, b) - 1, t - 1);
+		return 1;
+
+	return valid(a - 2, b - 2, t - 1) ||
+		valid(a - 1, b - 3, t - 1) || valid(a - 3, b - 1, t - 1);
+}
+
+bool valid()
+{
+	int x, y, z;
+	x = y = z = 0;
+
+
 }
 
 void solve()
@@ -32,19 +42,20 @@ void solve()
 	int a, b;
 	cin >> a >> b;
 
-	if (a > b) swap(a, b);
+	int lo = 0, hi = min(a, b), mid, ans;
 
-	int lo = 0, hi = min(a, b), mid;
-
-	while (hi > lo + 1)
+	while (hi >= lo)
 	{
 		mid = lo + (hi - lo) / 2;
 		if (valid(a, b, mid))
-			lo = mid;
+		{
+			ans = mid;
+			lo = mid + 1;
+		}
 		else
-			hi = mid;
+			hi = mid - 1;
 	}
-	cout << lo << nn;
+	cout << ans << nn;
 }
 
 int32_t main()
