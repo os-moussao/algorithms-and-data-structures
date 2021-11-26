@@ -1,0 +1,4 @@
+A (chStore): Accepted
+B (newProject): Accepted
+
+contest: https://codeforces.com/contest/1614
