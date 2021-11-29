@@ -20,7 +20,6 @@ void solve()
 	cin >> n;
 
 	int arr[n];
-	REP(i, n) cin >> arr[i];
 	
 	int k = 1;
 	int s = 0;
@@ -28,6 +27,7 @@ void solve()
 	int in = -1;
 	REP(i, n)
 	{
+		cin >> arr[i];
 		while (!(arr[i]&1))
 		{
 			arr[i] >>= 1;
