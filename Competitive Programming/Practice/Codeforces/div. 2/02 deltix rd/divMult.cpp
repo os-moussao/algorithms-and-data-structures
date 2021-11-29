@@ -14,21 +14,6 @@ using namespace std;
 #define nn '\n'
 #define ss ' '
 
-int maxO(int *arr, int n)
-{
-	int max = LLONG_MIN, in = -1;
-
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] > max && (arr[i]&1))
-		{
-			max = arr[i];
-			in = i;
-		}
-	}
-	return (in);
-}
-
 void solve()
 {
 	int n;
