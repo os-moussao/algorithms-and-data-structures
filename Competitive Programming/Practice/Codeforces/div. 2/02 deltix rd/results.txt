@@ -1,0 +1,3 @@
+A (divMult): Accepted
+
+contest: https://codeforces.com/contest/1609
