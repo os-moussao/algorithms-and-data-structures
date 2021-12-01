@@ -1,3 +1,4 @@
 A (divMult): Accepted
+B (sstr): Accepted
 
 contest: https://codeforces.com/contest/1609
