@@ -14,7 +14,6 @@ typedef vector<vi> vvi;
 typedef pair<int, int> pi;
 typedef vector<pi> vpi;
 
-#define REP(i, n) for(int i = 0; i < n; i++)
 #define REP(i, a, n) for(int i = a; i < n; i++)
 #define SZ size()
 #define LN length()
