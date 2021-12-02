@@ -1,5 +1,6 @@
 test.c
 test.cpp
 out
-a.out
+*.out
 in
+*.in
