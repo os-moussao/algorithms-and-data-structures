@@ -43,8 +43,7 @@ void solve()
 		int x;
 		cin >> x;
 
-		REP(j, 0, 3)
-			arr[i].b[j] = arr[i - 1].b[j];
+		arr[i].b = arr[i - 1].b;
 
 		arr[i].b[x - 1]++; 
 	}

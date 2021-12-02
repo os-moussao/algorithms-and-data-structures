@@ -17,8 +17,8 @@ typedef vector<pi> vpi;
 #define REP(i, a, n) for(int i = a; i < n; i++)
 #define SZ size()
 #define LN length()
-#define FST first
-#define SND second
+#define F first
+#define S second
 #define PB push_back
 #define PF push_front
 #define B begin()
