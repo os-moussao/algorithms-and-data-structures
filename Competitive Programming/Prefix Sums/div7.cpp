@@ -1,3 +1,4 @@
+// http://usaco.org/index.php?page=viewproblem2&cpid=595
 #include <fstream>
 #include <iostream>
 #include <iomanip>
