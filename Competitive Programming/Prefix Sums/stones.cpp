@@ -1,3 +1,4 @@
+// https://codeforces.com/contest/433/problem/B
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -28,15 +29,41 @@ typedef vector<pi> vpi;
 
 void solve()
 {
+	int n;
+	cin >> n;
 
+	vi v(n);
+	vi sv(n + 1); sv[0] = 0;
+	REP(i, 0, n) cin >> v[i];
+
+	vi u = v;
+	vi su(n + 1); su[0] = 0;
+	sort(u.B, u.E);
+
+	REP(i, 1, n + 1) sv[i] = sv[i - 1] + v[i - 1];
+
+	REP(i, 1, n + 1) su[i] = su[i - 1] + u[i - 1];
+	
+	int m;
+	cin >> m;
+
+	REP(i, 0, m)
+	{
+		int q, l, r;
+		cin >> q >> l >> r;
+
+		if (q == 1)
+			cout << sv[r] - sv[l - 1] << nn;
+		else
+			cout << su[r] - su[l - 1] << nn;
+	}
 }
 
 int32_t main()
 {
 	int t;
 
-	//cin >> t;
-	//t = 1;
+	t = 1;
 	while (t--) {
 		solve();
 	}
