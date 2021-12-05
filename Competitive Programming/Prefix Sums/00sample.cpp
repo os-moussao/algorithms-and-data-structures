@@ -15,8 +15,10 @@ typedef pair<int, int> pi;
 typedef vector<pi> vpi;
 
 #define REP(i, a, n) for(int i = a; i < n; i++)
+#define RREP(i, n, a) for(int i = n; i >= a; i--)
+#define IETR(i, a, b) for(auto i = a; i != b; i++)
 #define SZ size()
-#define LN length()
+#define L length()
 #define F first
 #define S second
 #define PB push_back
