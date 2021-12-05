@@ -14,6 +14,12 @@ typedef vector<int> vi;
 typedef vector<vi> vvi;
 typedef pair<int, int> pi;
 typedef vector<pi> vpi;
+typedef pair<int, int> pii;
+typedef pair<double, double> pdd;
+typedef pair<char, int> pci;
+typedef vector<pii> vpii;
+typedef vector<pdd> vpdd;
+typedef vector<pci> vpci;
 
 #define REP(i, a, n) for(int i = a; i < n; i++)
 #define RREP(i, n, a) for(int i = n; i >= a; i--)
