@@ -22,8 +22,10 @@ typedef vector<pdd> vpdd;
 typedef vector<pci> vpci;
 
 #define REP(i, a, n) for(int i = a; i < n; i++)
+#define FOR(i, n) for(int i = 0; i < n; i++)
 #define RREP(i, n, a) for(int i = n; i >= a; i--)
-#define IETR(i, a, b) for(auto i = a; i != b; i++)
+#define RFOR(i, n) for(int i = n; i >= 0; i--)
+#define ITER(i, a, b) for(auto i = a; i != b; i++)
 #define SZ size()
 #define L length()
 #define F first
