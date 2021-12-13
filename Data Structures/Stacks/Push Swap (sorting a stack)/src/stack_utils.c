@@ -6,13 +6,25 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:47:51 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/13 22:29:05 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/13 23:03:30 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	stack_push(t_node **stack, int data)
+void	swap(t_node *stack)
+{
+	int	tmp;
+
+	if (stack->next)
+	{
+		tmp = stack->data;
+		stack->data = stack->next->data;
+		stack->next->data = tmp;
+	}
+}
+
+void	push(t_node **stack, int data)
 {
 	t_node	*new = (t_node *)malloc(sizeof(t_node));
 	new->data = data;
@@ -20,7 +32,7 @@ void	stack_push(t_node **stack, int data)
 	(*stack) = new;
 }
 
-int	stack_pop(t_node **stack)
+int	pop(t_node **stack)
 {
 	int ret;
 
@@ -31,7 +43,7 @@ int	stack_pop(t_node **stack)
 	return (ret);
 }
 
-void	stack_clear(t_node **stack)
+void	clear(t_node **stack)
 {
 	while (*stack)
 		stack_pop(stack);
