@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:47:51 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/13 23:03:30 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/13 23:24:40 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ void	swap(t_node *stack)
 	int	tmp;
 
 	if (stack->next)
-	{
-		tmp = stack->data;
-		stack->data = stack->next->data;
-		stack->next->data = tmp;
-	}
+		ft_swap(&(stack->data), &(stack->next->data))
 }
 
 void	push(t_node **stack, int data)
