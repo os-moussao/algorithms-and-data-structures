@@ -25,6 +25,7 @@ typedef vector<pci> vpci;
 #define FOR(i, n) for(int i = 0; i < n; i++)
 #define RREP(i, n, a) for(int i = n; i >= a; i--)
 #define RFOR(i, n) for(int i = n; i >= 0; i--)
+#define CFOR(i, Condition) for(int i = 0; Condition; i++)
 #define ITER(i, a, b) for(auto i = a; i != b; i++)
 #define SZ size()
 #define L length()
@@ -48,20 +49,19 @@ int	power(int a, int b, int mod)
 		a = (a * a) % mod;
 		b >>= 1;
 	}
-	return res;
+	return res % mod;
 }
 
-int special(int MOD, string s)
+bool valid(vi &Pre, int n, int k, int MOD)
 {
-	if (MOD == 1)
-		return (s.L);
-	else // if (MOD == 2 || MOD == 5 || MOD == 10)
+	int exp = power(10, k, MOD);
+	if (Pre[k - 1] == 0) return 1;
+	REP(i, 1, n - k + 1)
 	{
-		RFOR(i, s.L - 1)
-			if ((s[i] - '0') % MOD == 0)
-				return (i + 1);
+		if (Pre[i + k - 1] == (Pre[i - 1] * exp) % MOD)
+			return 1;
 	}
-	return (0);
+	return 0;
 }
 
 void solve()
@@ -70,29 +70,24 @@ void solve()
 	int MOD;
 	cin >> s >> MOD;
 
-	if (MOD == 1 || MOD == 10 || MOD == 2 || MOD == 5)
+	vi Pre(s.L); Pre[0] = (s[0] - '0') % MOD;
+	REP(i, 1, s.L)
 	{
-		cout << special(MOD, s) << nn;
-		return ;
+		int d = s[i] - '0';
+		Pre[i] = (Pre[i - 1] * (10 % MOD) + d % MOD) % MOD;
 	}
-	vi hash(MOD, -1);
-	hash[0] = s.L;
 
-	int ans = 0;
-	int m = 0;
-	int exp = 1;
-
-	RFOR(i, s.L - 1)
+	int lo = 0, hi = s.L, ans, mid;
+	while (lo <= hi)
 	{
-		int digit = s[i] - '0';
-		m = ((digit * exp) % MOD + m) % MOD;
-
-		if (hash[m] == -1)
-			hash[m] = i;
-		else if (MOD % 10 != 0 && 10 % MOD  && power(10, s.L - hash[m] + 1, MOD) != 0)
-			ans = max(ans, hash[m] - i);
-
-		exp = (exp * (10 % MOD)) % MOD;
+		mid = lo + (hi - lo) / 2;
+		if (valid(Pre, s.L, mid, MOD))
+		{
+			lo = mid + 1;
+			ans = mid;
+		}
+		else
+			hi = mid - 1;
 	}
 	cout << ans << nn;
 }
@@ -106,4 +101,19 @@ int32_t main()
 		solve();
 	}
 	return 0;
+}
+
+
+/* useless function, but will need it later */
+int special(int MOD, string &s)
+{
+	if (MOD == 1)
+		return (s.L);
+	else
+	{
+		RFOR(i, s.L - 1)
+			if ((s[i] - '0') % MOD == 0)
+				return (i + 1);
+	}
+	return (0);
 }
