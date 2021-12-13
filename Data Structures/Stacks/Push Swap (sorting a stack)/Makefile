@@ -12,7 +12,7 @@ CFLAGS := -Wall -Werror -Wextra
 #
 # rules not to mixed with similar file names
 #
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re
 
 #
 # directories
