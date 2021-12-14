@@ -6,11 +6,17 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 21:57:44 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 21:58:15 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/14 22:19:59 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_putstr(char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}
 
 void	ft_putnbr(int n)
 {
