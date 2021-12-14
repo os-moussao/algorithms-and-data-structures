@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:32:25 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 01:50:32 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/14 21:58:46 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_node
 
 void	ft_swap(int *a, int *b);
 void	error(void);
+void	disp(t_node *stack, char name);
+void	ft_putnbr(int n);
 
 t_node	*create(char **av, int ac);
 void	push(t_node **stack, int data);
