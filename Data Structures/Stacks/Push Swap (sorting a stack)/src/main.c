@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 22:09:37 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 01:50:52 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/14 02:05:30 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	disp(t_node *stack, char name)
 	write(1, "\n", 1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_node	*a;
 
