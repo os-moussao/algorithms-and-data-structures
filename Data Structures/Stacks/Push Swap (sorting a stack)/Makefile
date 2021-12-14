@@ -21,6 +21,8 @@ INCLUDE := include/
 
 SRC_DIR := src/
 
+LIB_DIR := libft/
+
 #
 # necessary files
 #
@@ -31,20 +33,30 @@ SRC := $(addprefix $(SRC_DIR), $(CFILES))
 
 OBJ := $(SRC:.c=.o)
 
+LIB := libft/libft.a
+
+FT := ft
+
 #
 # rules
 #
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+$(NAME): $(OBJ) $(LIB)
+	$(CC) $(CFLAGS) -o $@ $^ -L$(LIB_DIR) -l$(FT)
+
+$(LIB):
+	make -C $(LIB_DIR) bonus
+	make -C $(LIB_DIR) clean
 
 %.o: %.c $(HFILES)
 	$(CC) $(CFLAGS) -c $< -I$(INCLUDE) -o $@
 
 clean:
 	$(RM) $(OBJ)
+
 fclean: clean
 	$(RM) $(NAME)
+	make -C $(LIB_DIR) fclean
 
 re: fclean all
