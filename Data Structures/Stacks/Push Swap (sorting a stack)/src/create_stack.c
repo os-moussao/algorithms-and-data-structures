@@ -6,13 +6,23 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:16:04 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 01:54:22 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/15 00:28:24 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_atoi(const char *str)
+static int	arr_len(char **arr)
+{
+	int len;
+
+	len = 0;
+	while (*arr++)
+		len++;
+	return (len);
+}
+
+static int	_atoi(const char *str)
 {
 	long long	res;
 	int			sign;
@@ -32,9 +42,16 @@ static int	ft_atoi(const char *str)
 t_node	*create(char **av, int ac)
 {
 	t_node	*stack;
+	char	**arr;
+	int		len;
 
 	stack = NULL;
 	while (ac--)
-		push(&stack, ft_atoi(av[ac]));
+	{
+		arr = ft_split(av[ac], ' ');
+		len = arr_len(arr);
+		while (len--)
+			push(&stack, _atoi(arr[len]));
+	}
 	return (stack);
 }
