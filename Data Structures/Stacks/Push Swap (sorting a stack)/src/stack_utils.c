@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:47:51 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/13 23:24:40 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/14 01:55:37 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	swap(t_node *stack)
 {
-	int	tmp;
-
 	if (stack->next)
-		ft_swap(&(stack->data), &(stack->next->data))
+		ft_swap(&(stack->data), &(stack->next->data));
 }
 
 void	push(t_node **stack, int data)
 {
 	t_node	*new = (t_node *)malloc(sizeof(t_node));
+	if (!new)
+		error();
 	new->data = data;
 	new->next = (*stack);
 	(*stack) = new;
@@ -42,5 +42,5 @@ int	pop(t_node **stack)
 void	clear(t_node **stack)
 {
 	while (*stack)
-		stack_pop(stack);
+		pop(stack);
 }
