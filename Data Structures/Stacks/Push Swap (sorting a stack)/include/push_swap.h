@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:32:25 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 21:58:46 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/14 22:19:17 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_swap(int *a, int *b);
 void	error(void);
 void	disp(t_node *stack, char name);
 void	ft_putnbr(int n);
+void	ft_putstr(char *str);
 
 t_node	*create(char **av, int ac);
 void	push(t_node **stack, int data);
@@ -39,5 +40,7 @@ void	clear(t_node **stack);
 void	rotate(t_node *stack);
 void	rrotate(t_node *stack);
 int		top(t_node *stack);
+
+void	sort_stack(t_node **a);
 
 #endif

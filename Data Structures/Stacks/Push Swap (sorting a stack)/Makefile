@@ -24,7 +24,7 @@ SRC_DIR := src/
 #
 # necessary files
 #
-CFILES := main.c create_stack.c display.c stack_utils.c stack_utils_2.c utils.c
+CFILES := main.c create_stack.c display.c stack_utils.c stack_utils_2.c utils.c sort.c
 HFILES := $(INCLUDE)push_swap.h
 
 SRC := $(addprefix $(SRC_DIR), $(CFILES))

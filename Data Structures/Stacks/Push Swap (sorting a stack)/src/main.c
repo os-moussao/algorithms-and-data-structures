@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 22:09:37 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 21:59:52 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/14 22:10:20 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	main(int ac, char **av)
 	t_node	*a;
 
 	a = create(av + 1, ac - 1);
-	//sort_stack(&a);
-	disp(a, 'a');
+	if (!a || !(a->next))
+		exit(0);
+	sort_stack(&a);
+	//disp(a, 'a');
 }
