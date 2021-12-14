@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:32:25 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 22:19:17 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/15 00:27:35 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include "../libft/libft.h"
 
 # define I_MAX 2147483647
 # define I_MIN -2147483648
