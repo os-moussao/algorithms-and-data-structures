@@ -6,22 +6,46 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 21:53:20 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/14 22:36:15 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/16 00:13:15 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_stack(t_node **a)
+static bool	is_sorted(t_node *stack)
 {
-	t_node	*b;
+	int	x;
 
-	if (!((*a)->next->next))
+	if (!stack || !stack->next)
+		return (true);
+	x = stack->data;
+	stack = stack->next;
+	while (stack)
 	{
-		if ((*a)->data > (*a)->next->data)
+		if (stack->data > x)
+			return (false);
+	}
+	return (true);
+}
+
+t_node	*sort_stack(t_node *a)
+{
+	//return (a);
+	
+	//t_node	*b;
+
+
+	if (is_sorted(a))
+		return (a);
+	return (a);
+
+	/*
+	if (!(a->next->next))
+	{
+		if (a->data > a->next->data)
 		{
 			ft_putstr("sa\n");
-			swap(*a);
+			swap(a);
 		}
 		return ;
 	}
@@ -46,6 +70,5 @@ void	sort_stack(t_node **a)
 		}
 		//}
 	}
-	disp(*a, 'a');
-	disp(b, 'b');
+	*/
 }
