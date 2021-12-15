@@ -43,7 +43,7 @@ FT := ft
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB)
-	$(CC) $(CFLAGS) -o $@ $^ -L$(LIB_DIR) -l$(FT)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIB_DIR) -l$(FT)
 
 $(LIB):
 	make -C $(LIB_DIR) bonus
