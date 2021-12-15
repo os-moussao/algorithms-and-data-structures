@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:16:04 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/15 00:28:24 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/15 23:24:14 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	arr_len(char **arr)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (*arr++)
@@ -42,6 +42,7 @@ static int	_atoi(const char *str)
 t_node	*create(char **av, int ac)
 {
 	t_node	*stack;
+	t_node	*tmp;
 	char	**arr;
 	int		len;
 
@@ -49,9 +50,18 @@ t_node	*create(char **av, int ac)
 	while (ac--)
 	{
 		arr = ft_split(av[ac], ' ');
+		if (!*arr)
+			error();
 		len = arr_len(arr);
 		while (len--)
 			push(&stack, _atoi(arr[len]));
+		tmp = stack->next;
+		while (tmp)
+		{
+			if (tmp->data == stack->data)
+				error();
+			tmp = tmp->next;
+		}
 	}
 	return (stack);
 }
