@@ -1,2 +1,2 @@
 #!/bin/sh
-gcc -g src/*.c -Iinclude -o push_swap
+gcc -g src/*.c -Llibft/ -lft -Iinclude -o push_swap
