@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:16:04 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/15 23:24:14 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/17 17:16:46 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ static int	arr_len(char **arr)
 	while (*arr++)
 		len++;
 	return (len);
+}
+
+static void	clear_arr(char **arr)
+{
+	int i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }
 
 static int	_atoi(const char *str)
@@ -39,6 +49,9 @@ static int	_atoi(const char *str)
 	return ((int)res);
 }
 
+/*
+ * need to clear the stack (or the array) when an error occures
+ **/
 t_node	*create(char **av, int ac)
 {
 	t_node	*stack;
@@ -55,6 +68,7 @@ t_node	*create(char **av, int ac)
 		len = arr_len(arr);
 		while (len--)
 			push(&stack, _atoi(arr[len]));
+		clear_arr(arr);
 		tmp = stack->next;
 		while (tmp)
 		{
