@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 #include <cmath>
+#include <algorithm>
+#include <math.h>
 
 using namespace std;
 

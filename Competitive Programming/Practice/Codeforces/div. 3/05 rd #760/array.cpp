@@ -38,47 +38,14 @@ typedef vector<pci> vpci;
 #define nn '\n'
 #define ss ' '
 
-int solve1(int n, int k, vi arr)
+int solve(int n, int k, vi arr)
 {
 	int ans = 0;
-	int i = n - 1;
-	while (i > 0 && k--)
-	{
-		ans += arr[i - 1] / arr[i];
-		i -= 2;
-	}
-	while (i >= 0)
-		ans += arr[i--];
-	return ans;
-}
-
-int solve2(int n, int k, vi arr)
-{
-	int ans = 0;
-	int i = 0, j = n - 1;
-	while (i < j && k--)
-	{
-		ans += arr[i] / arr[j];
-		i++, j--;
-	}
-	while (i <= j)
+	int i = 0;
+	while (i < n - k * 2)
 		ans += arr[i++];
-	return ans;
-}
-
-int solve3(int n, int k, vi arr)
-{
-	int ans = 0;
-	int i = n - 1;
-
-	while (k--)
-	{
-		ans += arr[i - 2] / arr[i];
-		i--;
-	}
-	int j = 0;
-	while (j < i - 2)
-		ans += arr[j++];
+	while (i < n - k)
+		ans += arr[i] / arr[i + k], i++;
 	return ans;
 }
 
@@ -95,7 +62,7 @@ int32_t main()
 		FOR(i, n) cin >> arr[i];
 		sort(arr.B, arr.E);
 
-		cout << min({solve1(n, k, arr), solve2(n, k, arr), solve3(n, k, arr)}) << nn;
+		cout << solve(n, k, arr) << nn;
 	}
 	return 0;
 }
