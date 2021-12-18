@@ -4,12 +4,12 @@
 #include <vector>
 #include <map>
 #include <cmath>
-
+ 
 using namespace std;
-
+ 
 #define int long long
 #define double long double
-
+ 
 typedef vector<int> vi;
 typedef vector<vi> vvi;
 typedef pair<int, int> pi;
@@ -20,7 +20,7 @@ typedef pair<char, int> pci;
 typedef vector<pii> vpii;
 typedef vector<pdd> vpdd;
 typedef vector<pci> vpci;
-
+ 
 #define REP(i, a, n) for(int i = a; i < n; i++)
 #define FOR(i, n) for(int i = 0; i < n; i++)
 #define RREP(i, n, a) for(int i = n; i >= a; i--)
@@ -37,7 +37,7 @@ typedef vector<pci> vpci;
 #define E end()
 #define nn '\n'
 #define ss ' '
-
+ 
 int	power(int a, int b, int mod)
 {
 	a %= mod;
@@ -51,7 +51,7 @@ int	power(int a, int b, int mod)
 	}
 	return res % mod;
 }
-
+ 
 bool valid(vi &Pre, int n, int k, int MOD)
 {
 	int exp = power(10, k, MOD);
@@ -63,21 +63,21 @@ bool valid(vi &Pre, int n, int k, int MOD)
 	}
 	return 0;
 }
-
+ 
 void solve()
 {
 	string s;
 	int MOD;
 	cin >> s >> MOD;
-
+ 
 	vi Pre(s.L); Pre[0] = (s[0] - '0') % MOD;
 	REP(i, 1, s.L)
 	{
 		int d = s[i] - '0';
-		Pre[i] = (Pre[i - 1] * (10 % MOD) + d % MOD) % MOD;
+		Pre[i] = ((Pre[i - 1] * 10) % MOD + d) % MOD;
 	}
-
-	int lo = 0, hi = s.L, ans, mid;
+ 
+	int lo = 1, hi = s.L, ans = 0, mid;
 	while (lo <= hi)
 	{
 		mid = lo + (hi - lo) / 2;
@@ -91,19 +91,19 @@ void solve()
 	}
 	cout << ans << nn;
 }
-
+ 
 int32_t main()
 {
 	int t;
-
+ 
 	t = 1;
 	while (t--) {
 		solve();
 	}
 	return 0;
 }
-
-
+ 
+ 
 /* useless function, but will need it later */
 int special(int MOD, string &s)
 {
