@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:32:25 by omoussao          #+#    #+#             */
-/*   Updated: 2021/12/15 23:41:42 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/18 01:34:59 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	swap(t_node *stack);
 void	clear(t_node **stack);
 void	rotate(t_node *stack);
 void	rrotate(t_node *stack);
-int		top(t_node *stack);
+int		stack_len(t_node *stack);
+int		bottom(t_node *stack);
 
 t_node	*sort_stack(t_node *a);
 
