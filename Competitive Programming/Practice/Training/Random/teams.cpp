@@ -1,3 +1,4 @@
+// link: https://codeforces.com/contest/1249/problem/A
 #include <iostream>
 #include <iomanip>
 #include <string>

@@ -1,4 +1,4 @@
-// https://codeforces.com/contest/651/problem/A
+// link: https://codeforces.com/contest/1392/problem/C
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -41,20 +41,19 @@ typedef vector<pci> vpci;
 
 void solve()
 {
-	int a, b;
-	cin >> a >> b;
-	/*
-	if (a > b) swap(a, b);
-	int x = ceil((b - a) / 3);
-	cout << x + 2 * min(a - x, b - x) << nn;*/
+	int n;
+	cin >> n;
+	vi arr(n);
 	int ans = 0;
-	while (a && b)
+
+	FOR(i, n)
 	{
-		if (a == 1 && b == 1)
-			break ;
-		if (a > b) swap(a, b);
-		a += 1, b -= 2;
-		ans++;
+		cin >> arr[i];
+		if (i != 0)
+		{
+			if (arr[i] < arr[i - 1])
+				ans += arr[i - 1] - arr[i];
+		}
 	}
 	cout << ans << nn;
 }
@@ -63,8 +62,8 @@ int32_t main()
 {
 	int t;
 
-	//cin >> t;
-	t = 1;
+	cin >> t;
+	//t = 1;
 	while (t--) {
 		solve();
 	}
