@@ -1,11 +1,17 @@
 #!/bin/sh
 while read p;
 do
-    #./push_swap $p | ./checker_Mac $p
     res=$(./push_swap $p | ./checker_Mac $p)
-    # echo $res
-    if [[ $res == "KO" ]];
-    then
-        echo $p
-    fi
+    n=$(./push_swap $p | wc -l)
+    echo "res = $res    count = $n"
+    # if [[ $n -gt 12 ]];
+    # then
+    #     echo "perm = $p            count = $n"
+    #     #./push_swap $p | ./checker_Mac $p
+    # fi
+    # res=$(./push_swap $p | ./checker_Mac $p)
+    # if [[ $res == "KO" ]];
+    # then
+    #     echo $p
+    # fi
 done < permutations
