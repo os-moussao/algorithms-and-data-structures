@@ -55,6 +55,6 @@ int	main(void)
 	int n;
 	cin >> n;
 	FILE *out = freopen("permutations", "w", stdout);
-	permutations(5, 5);
+	permutations(n, n);
 	fclose(out);
 }
