@@ -3,3 +3,4 @@ push_swap
 *.o
 libft/libft.a
 checker_Mac
+permutations
