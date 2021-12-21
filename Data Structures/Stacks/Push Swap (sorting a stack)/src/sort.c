@@ -163,34 +163,4 @@ t_node	*sort_stack(t_node *a)
 	else if (len == 3)
 		return (sort_three(a));
 	return (selection_sort(a, len));
-	/*
-	else if (len == 4)
-		return (sort_foor(a));
-	else if (len == 5)
-		return (sort_five(a));
-	else // if (len < 100)
-		return (selection_sort(a, len));*/
-
-	// dumb algorithm for the remaining lengths
-	b = NULL;
-	ft_putstr("pb\n");
-	push(&b, pop(&a));
-	while (a)
-	{
-		ft_putstr("pb\n");
-		push(&b, pop(&a));
-		while (b->next && b->data < b->next->data)
-		{
-			ft_putstr("sb\n");
-			swap(b);
-			ft_putstr("pa\n");
-			push(&a, pop(&b));
-		}
-	}
-	while (b)
-	{
-		ft_putstr("pa\n");
-		push(&a, pop(&b));
-	}
-	return (a);
 }
