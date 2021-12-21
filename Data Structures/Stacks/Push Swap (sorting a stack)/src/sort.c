@@ -51,6 +51,27 @@ static int find_min(t_node *a)
 	return (min_i);
 }
 
+static int find_max(t_node *a)
+{
+	int	max;
+	int	max_i;
+	int	i;
+
+	i = 0;
+	max = I_MIN;
+	while (a)
+	{
+		if (a->data >= max)
+		{
+			max = a->data;
+			max_i = i;
+		}
+		i++;
+		a = a->next;
+	}
+	return (max_i);
+}
+
 t_node	*min_up(t_node *a, int len)
 {
 	int	min;
@@ -78,34 +99,23 @@ t_node	*min_up(t_node *a, int len)
 
 t_node	*sort_three(t_node *a)
 {
-	if (a->data < a->next->data)
+	int	max;
+
+	max = find_max(a);
+	if (max == 0)
+	{
+		ft_putstr("ra\n");
+		rotate(a);
+	}
+	else if (max == 1)
 	{
 		ft_putstr("rra\n");
 		rrotate(a);
-		if (a->data > a->next->data)
-		{
-			ft_putstr("sa\n");
-			swap(a);
-		}
 	}
-	else
+	if (a->data > a->next->data)
 	{
-		if (a->data > a->next->data && a->next->data > bottom(a))
-		{
-			ft_putstr("sa\nrra\n");
-			swap(a);
-			rrotate(a);
-		}
-		else if (a->data > bottom(a))
-		{
-			ft_putstr("ra\n");
-			rotate(a);
-		}
-		else
-		{
-			ft_putstr("sa\n");
-			swap(a);
-		}
+		ft_putstr("sa\n");
+		swap(a);
 	}
 	return (a);
 }
