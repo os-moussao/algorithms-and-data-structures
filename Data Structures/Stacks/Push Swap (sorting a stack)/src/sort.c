@@ -131,8 +131,7 @@ t_node	*selection_sort(t_node *a, int len)
 		ft_putstr("pb\n");
 		push(&b, pop(&a));
 	}
-	if (!sorted(a))
-		a = sort_three(a);
+	a = sort_three(a);
 	while (b)
 	{
 		ft_putstr("pa\n");
@@ -143,7 +142,6 @@ t_node	*selection_sort(t_node *a, int len)
 
 t_node	*sort_stack(t_node *a)
 {
-	t_node	*b;
 	int		len;
 
 	// if sorted quit
@@ -160,7 +158,5 @@ t_node	*sort_stack(t_node *a)
 			ft_putstr("sa\n");
 		return (a);
 	}
-	else if (len == 3)
-		return (sort_three(a));
 	return (selection_sort(a, len));
 }

@@ -3,7 +3,9 @@ while read p;
 do
     res=$(./push_swap $p | ./checker_Mac $p)
     n=$(./push_swap $p | wc -l)
-    if [[ $res == "KO" ||  n -gt 12 ]]; then
+    echo "$res      $n"
+    # if [[ $res == "KO" ||  n -gt 12 ]]; then
+    if [[ $res == "KO" ]]; then
     echo "p = $p"
     fi
     # if [[ $n -gt 12 ]];
