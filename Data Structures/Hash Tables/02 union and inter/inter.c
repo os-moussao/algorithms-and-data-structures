@@ -6,7 +6,7 @@
 /*   By: omoussao <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 19:26:39 by omoussao          #+#    #+#             */
-/*   Updated: 2021/11/25 19:37:42 by omoussao         ###   ########.fr       */
+/*   Updated: 2021/12/31 11:47:22 by omoussao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ int	main(int ac, char **av)
 	char	*s1 = av[1], *s2 = av[2];
 	while (*s2)
 	{
-		hash[*s2] = 1;
+		hash[(int)*s2] = 1;
 		s2++;
 	}
 	while (*s1)
 	{
-		if (hash[*s1] == 1)
+		if (hash[(int)*s1] == 1)
 		{
 			putchar(*s1);
-			hash[*s1] = 0;
+			hash[(int)*s1] = 0;
 		}
 		s1++;
 	}
