@@ -12,6 +12,7 @@
 #define CFOR(i, Condition) for(int i = 0; Condition; i++)
 #define OUT(s) printf(s)
 #define OUTI(i) printf("%d", i)
+#define OUTLL(l) printf("%lld", l)
 #define OUTC(c) printf("%c", c)
 #define OUTS(s) printf("%s", s)
 #define LN(n, s) int n = strlen(s)
