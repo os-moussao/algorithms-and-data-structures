@@ -1,15 +1,5 @@
-geeksforgeeks:
-	https://www.geeksforgeeks.org/data-structures/
-	https://www.geeksforgeeks.org/fundamentals-of-algorithms/
-	https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/
-	https://www.geeksforgeeks.org/how-to-prepare-for-acm-icpc/
-
-Hackerearth:
-	https://www.hackerearth.com/practice/
-	https://www.hackerearth.com/practice/algorithms/
-	https://www.hackerearth.com/practice/data-structures/
-	https://www.hackerearth.com/practice/math/
-	https://www.hackerearth.com/practice/codemonk/
+geeksforgeeks.org
+codeforces.com
 
 projet-euler:
 	https://projecteuler.net/ 
