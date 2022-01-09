@@ -29,6 +29,3 @@ Books:
 
 For more problem solving:
 	https://cses.fi/problemset/
-
-git:
-	https://www.tecmint.com/fix-git-user-credentials-for-https/
