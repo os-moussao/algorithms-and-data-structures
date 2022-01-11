@@ -47,14 +47,6 @@ string int_ter(string ter, int n)
 	return ter;
 }
 
-string tor(string a, string b)
-{
-	string res = "";
-	FOR(i, a.L)
-		res += (char)((a[i] - '0' + b[i] - '0') % 3 + '0');
-	return res;
-}
-
 int	ter_int(string ter)
 {
 	int res = 0;
@@ -76,16 +68,21 @@ void match(string &aa, string &bb)
 	}
 }
 
+string tor(string a, string b)
+{
+	string res = "";
+	match(a, b);
+	FOR(i, a.L)
+		res += (char)((a[i] - '0' + b[i] - '0') % 3 + '0');
+	return res;
+}
+
 void solve()
 {
 	int a, b;
 	cin >> a >> b;
 	string aa = int_ter("", a), bb = int_ter("", b);
-	match(aa, bb);
-	b = ter_int(tor(aa, bb));
-	bb = int_ter("", b);
-	match(aa, bb);
-	cout << ter_int(tor(aa, bb)) << nn;
+	cout << ter_int(tor(aa, tor(aa, bb))) << nn;
 }
 
 int32_t main()
