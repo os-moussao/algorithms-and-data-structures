@@ -40,7 +40,22 @@ typedef vector<pci> vpci;
 
 void solve()
 {
-
+	int n; cin >> n;
+	vi arr(n);
+	FOR(i, n) cin >> arr[i];
+	vi cop = arr;
+	map <int, bool> av;
+	sort(cop.B, cop.E, greater<int>());
+	int i = 0, j = 0;
+	while (i < n) {
+		av[arr[i]] = 1;
+		while (av[cop[j]]) {
+			cout << cop[j] << ss;
+			j++;
+		}
+		cout  << nn;
+		i++;
+	}
 }
 
 int32_t main()
@@ -48,7 +63,7 @@ int32_t main()
 	int t;
 
 	//cin >> t;
-	//t = 1;
+	t = 1;
 	while (t--) {
 		solve();
 	}
