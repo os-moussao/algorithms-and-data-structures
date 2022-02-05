@@ -1,5 +1,5 @@
 ## Hi there
-In this repo I share what I practice everyday to get good at algorothms and data structures, and bellow are some of the links that will help you to to get started too
+In this repo I share what I practice everyday to get good at algorothms and data structures, and bellow are some links that will help you to to get started too
 ### For Problem Solving
 * [Training roadmap for newcomers](https://codeforces.com/blog/entry/65133)
 * [Project euler - fun mathy puzzles](https://projecteuler.net/)
