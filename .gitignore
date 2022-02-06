@@ -7,3 +7,5 @@ in
 tester
 .vscode
 .cph
+*.bin
+*.ig
