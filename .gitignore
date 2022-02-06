@@ -5,3 +5,5 @@ out
 in
 *.in
 tester
+.vscode
+
