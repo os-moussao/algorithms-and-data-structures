@@ -10,6 +10,9 @@ bool match(char *name, char *pattern)
 		while (pattern[1] == '*')
 			pattern++;
 
+	if (*pattern == '?' || *pattern == *name)
+		return match(name + 1, pattern + 1);
+
     if (*name == '\0' && *pattern == '*' && pattern[1])
         return false;
 
@@ -26,11 +29,29 @@ void test(char *n, char *p) {
 int main(int ac, char **av)
 {
 	if (ac != 3) {
-		printf("./prog <name> <wildcard pattern>\n");
+		printf("./prog <name> <pattern>\n");
 		return 1;
 	}
 	test(av[1], av[2]);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * This is how I tried to solve this problem before (using two ponters method)
