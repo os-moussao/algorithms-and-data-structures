@@ -10,3 +10,4 @@ tester
 *.bin
 *.ig
 tmp
+.DS_Store
