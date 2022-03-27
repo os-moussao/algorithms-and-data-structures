@@ -1,0 +1,131 @@
+// problem: https://codeforces.com/problemset/problem/771/A
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <map>
+#include <cmath>
+#include <stack>
+#include <queue>
+#include <algorithm>
+ 
+using namespace std;
+ 
+#define int long long
+#define double long double
+ 
+typedef vector<bool> vb;
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<char> vc;
+typedef vector<vc> vvc;
+typedef vector<string> vs;
+typedef vector<vs> vvs;
+typedef pair<int, int> pi;
+typedef vector<pi> vpi;
+typedef pair<double, double> pdd;
+typedef pair<char, int> pci;
+typedef vector<pci> vpci;
+ 
+#define REP(i, a, n) for(int i = a; i < n; i++)
+#define FOR(i, n) for(int i = 0; i < n; i++)
+#define RREP(i, n, a) for(int i = n; i >= a; i--)
+#define RFOR(i, n) for(int i = n; i >= 0; i--)
+#define ITER(i, a, b) for(auto i = a; i != b; i++)
+#define SZ size()
+#define L length()
+#define F first
+#define S second
+#define MP(x, y) make_pair(x, y)
+#define PB push_back
+#define PF push_front
+#define B begin()
+#define RB rbegin()
+#define E end()
+#define RE rend()
+#define ALL(a) a.B, a.E
+#define RALL(a) a.RB, a.RE
+#define nn '\n'
+#define ss ' '
+#define YESORNO(x) cout << (x? "YES\n": "NO\n")
+#define MAXVEC(vec) *max_element(ALL(vec))
+#define MINVEC(vec) *min_element(ALL(vec))
+#define getunique(vec)  {sort(vec.begin(), vec.end()); vec.erase(unique(vec.begin(), vec.end()), vec.end());}
+ 
+vi vis;
+vvi graph;
+int	depth;
+map<pi, bool> connected;
+
+/**
+ * every vertex should have the same number of neighbors as his parent
+ * and should be connected to the parent of his parent
+ */
+bool dfs(int vertex, int par, int grand_pa)
+{
+	if (par != -1 && graph[vertex].SZ != graph[par].SZ)
+		return (vis[vertex] = 1, 0);
+ 
+	if (vis[vertex])
+		return 1;
+ 
+	vis[vertex] = 1;
+ 
+	for (int neigh: graph[vertex])
+	{
+		connected[MP(vertex, neigh)] = connected[MP(neigh, vertex)] = 1;
+ 
+		if (vis[neigh]) {
+			if (graph[neigh].SZ != graph[vertex].SZ) return 0;
+			continue ;
+		}
+ 
+		if (!dfs(neigh, vertex, par))
+			return 0;
+	}
+ 
+	if (grand_pa != -1 && !connected[MP(grand_pa, vertex)] && !connected[MP(vertex, grand_pa)])
+		return (vis[vertex] = 1, 0);
+ 
+	return 1;
+}
+ 
+void solve()
+{
+	int n, m;
+	cin >> n >> m;
+	vis = vi(n);
+	// nfs = vi(n);
+	graph = vvi(n);
+	FOR (i, m) {
+		int v, u; cin >> v >> u;
+		--v; --u;
+		graph[v].PB(u);
+		graph[u].PB(v);
+	}
+ 
+	FOR (i, n) {
+		depth = 0;
+		if (!vis[i]) {
+			if (!dfs(i, -1, -1))
+			{
+				cout << "NO\n";
+				return ;
+			}
+		}
+	}
+	cout << "YES\n";
+}
+ 
+int32_t main()
+{
+	int t;
+ 
+	//cin >> t;
+	t = 1;
+	while (t--) {
+		solve();
+	}
+	return 0;
+}
