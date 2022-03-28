@@ -39,3 +39,21 @@ public:
         return rec_dp(days);
     }
 };
+
+// tabulation approach
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        vector <int> dp (days.size() + 1, 1e9);
+        dp[days.size()] = 0;
+        int d7, d30;
+        
+		for (int i = days.size() - 1; i >= 0; i--) {
+            d7 = lower_bound(days.begin() + i, days.end(), days[i] + 7) - days.begin();
+            d30 = lower_bound(days.begin() + i, days.end(), days[i] + 30) - days.begin();
+            dp[i] = min({costs[0] + dp[i + 1], costs[1] + dp[d7], costs[2] + dp[d30]});
+        }
+        // for (int i = 0; i < days.size() + 1; i++) cout << dp[i] << ' ';
+        return dp[0];
+    }
+};
