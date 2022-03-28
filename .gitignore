@@ -11,3 +11,4 @@ tester
 *.ig
 tmp
 .DS_Store
+*.dSYM

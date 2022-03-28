@@ -40,7 +40,7 @@ public:
     }
 };
 
-// tabulation approach
+// tabulation approach: top --> down
 class Solution {
 public:
     int mincostTickets(vector<int>& days, vector<int>& costs) {
@@ -55,5 +55,24 @@ public:
         }
         // for (int i = 0; i < days.size() + 1; i++) cout << dp[i] << ' ';
         return dp[0];
+    }
+};
+
+// tabulation: bottom --> up
+class Solution {
+public:
+    int mincostTickets(vector<int>& days, vector<int>& costs) {
+        vector <int> dp (days.size() + 1, 1e9);
+        dp[0] = 0;
+        int pre7, pre30;
+        
+        for (int i = 1; i <= days.size(); i++) {
+            pre7 = upper_bound(days.begin(), days.begin() + i, days[i - 1] - 7) - days.begin();
+            pre30 = upper_bound(days.begin(), days.begin() + i, days[i - 1] - 30) - days.begin();
+            dp[i] = min({dp[i - 1] + costs[0], dp[pre7] + costs[1], dp[pre30] + costs[2]});
+            cout << dp[i] << ' ';
+        }
+
+        return dp[days.size()];
     }
 };
