@@ -1,9 +1,10 @@
 ## Hi there
-In this repo I share what I practice everyday to get good at algorothms and data structures, and bellow are some links that will help you to to get started too
-### For Problem Solving
+In this repo I share what I practice everyday to get good at solving problems, and bellow are some links that will help you to to get started too
+### Problem Solving
 * [Training roadmap for newcomers](https://codeforces.com/blog/entry/65133)
 * [Project euler - fun mathy puzzles](https://projecteuler.net/)
 * [CSES problemset](https://cses.fi/problemset/)
+* [Yet another list of interesting problems](https://codeforces.com/blog/entry/54526)
 ### Great Youtube Channels
 * [3blue1brown](https://www.youtube.com/c/3blue1brown/)
 * [Back To Back SWE](https://www.youtube.com/channel/UCmJz2DV1a3yfgrR7GqRtUUA)
@@ -13,3 +14,6 @@ In this repo I share what I practice everyday to get good at algorothms and data
 * [CS50 - for computer science knowledge](https://cs50.harvard.edu/x/)
 * [Data structures in C and C++](https://www.udemy.com/course/datastructurescncpp/)
 * [Competitive Programmer's Handbook](https://cses.fi/book/index.php)
+### Libraries
+* [code-library](https://github.com/ShahjalalShohag/code-library)
+* [kactl](https://github.com/kth-competitive-programming/kactl)
