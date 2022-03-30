@@ -17,3 +17,6 @@ In this repo I share what I practice everyday to get good at solving problems, a
 ### Libraries
 * [code-library](https://github.com/ShahjalalShohag/code-library)
 * [kactl](https://github.com/kth-competitive-programming/kactl)
+### Sites
+* [cp-algorithms](https://cp-algorithms.com/)
+* [cppreference](https://en.cppreference.com/w/cpp/container)
