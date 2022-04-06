@@ -161,7 +161,7 @@ public:
 	bool dfs_ucycle(int s, vector<bool> &vis, int par) {
 		vis[s] = 1;
 		for (int u: adj[s]) {
-			if (vis[u] && u == par) return true;
+			if (vis[u] && u != par) return true;
 			if (!vis[u] && dfs_ucycle(u, vis, s)) return true;
 		}
 		return false;
