@@ -63,12 +63,16 @@ typedef vector<pci> vpci;
 #define RE rend()
 #define ALL(a) a.B, a.E
 #define RALL(a) a.RB, a.RE
-#define nn '\n'
-#define ss ' '
+#define endl '\n'
 #define YESORNO(x) cout << (x? "YES\n": "NO\n")
 #define MAXVEC(vec) *max_element(ALL(vec))
 #define MINVEC(vec) *min_element(ALL(vec))
 #define getunique(vec)  {sort(vec.begin(), vec.end()); vec.erase(unique(vec.begin(), vec.end()), vec.end());}
+
+template<class T> bool ckmin(T& a, const T b) { return b < a ? a = b, 1 : 0; }
+template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
+
+const int INF = 1e18L + 5;
 
 void __print(int x) {cerr << x;}
 void __print(long x) {cerr << x;}
@@ -94,9 +98,8 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-} using namespace macros;
-void    setIO(string s);
-
+}
+using namespace macros;
 
 void solve()
 {
@@ -113,9 +116,6 @@ int32_t main()
 	cin.tie(0);
 	cout << setprecision(20);
 	cout << fixed;
-	//freopen(".in", "r", stdin);
-	//freopen(".out", "w", stdout);
-	// setIO("");
 
 	preprocessing();
 
@@ -126,9 +126,4 @@ int32_t main()
 		solve();
 	}
 	return 0;
-}
-
-void setIO(string s) {
-	freopen((s + ".in").c_str(), "r", stdin);
-	freopen((s + ".out").c_str(), "w", stdout);
 }
