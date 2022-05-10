@@ -189,40 +189,38 @@ int main()
 // My DSU template for cp
 /*
 class DSU {
-public:
-	int N = 0;
-	int cnt = 0;
-	vector <int> par;
-	vector <int> sz;
-	vector <int> rnk;
-	DSU(){N=0; cnt=0;}
-	DSU(int n) {
-		N = cnt = n;
-		par.resize(n);  sz.resize(n);  rnk.resize(n);
-		for (int i = 0; i < n; i++) {
-			par[i] = i; sz[i] = 1; rnk[i] = 0;
+	public:
+		int n;
+		vector <int> par;
+		vector <int> sz;
+		int cnt;
+		DSU(){}
+		DSU(int N) {
+			n = cnt = N;
+			par.resize(n); sz.resize(n);
+			while (N--) {
+				par[N] = N;
+				sz[N] = 1;
+			}
 		}
-	}
-	int find(int p) {
-		return (p == par[p]? p: par[p] = find(par[p]));
-	}
-	bool connected(int p, int q) {
-		return find(p) == find(q);
-	}
-	int size(int p) {
-		return sz[find(p)];
-	}
-	bool unify(int p, int q)
-	{
-		int root1 = find(p);
-		int root2 = find(q);
-		if (root1 == root2) return 0;
-		if (rnk[root2] > rnk[root1]) swap(root1, root2);
-		par[root2] = root1;
-		sz[root1] += sz[root2];
-		if (rnk[root1] == rnk[root2])  rnk[root1]++;
-		cnt--;
-		return 1;
-	}
+		int find(int p) {
+			return par[p] == p? p: par[p] = find(par[p]);
+		}
+		bool connected(int p, int q) {
+			return find(p) == find(q);
+		}
+		int size(int p) {
+			return sz[find(p)];
+		}
+		bool unify(int p, int q) {
+			int root1 = find(p);
+			int root2 = find(q);
+			if (root1 == root2) return 0;
+			if (sz[root1] < sz[root2]) swap(root1, root2);
+			par[root2] = root1;
+			sz[root1] += sz[root2];
+			cnt--;
+			return 1;
+		}
 };
 */
