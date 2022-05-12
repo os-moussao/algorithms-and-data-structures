@@ -1,71 +1,55 @@
-// https://codeforces.com/edu/course/2/lesson/6/2/practice/contest/283932/problem/D
-#include <iostream>
-#include <cmath>
+// problem link: https://codeforces.com/edu/course/2/lesson/6/2/practice/contest/283932/problem/D
+#include <bits/stdc++.h>
+
 using namespace std;
 
 #define int long long
+#define endl '\n'
 
-struct ps
-{
-	int t, z, y, m;
+struct at {
+	int t;
+	int x;
+	int y;
 };
-/*
-bool	valid2(int t, int z, int y, int bl, int time)
-{
-	
-}*/
 
-bool	valid(ps *arr, int n, int m, int time)
-{
-	// calc how many ballons can be inflated by each ps 
-	// add them
-	// compare with m
-	// if valid save ps.m
-	int total = 0;
-	for (int i = 0; i < n; i++)
-	{
-		int t = arr[i].t;
-		int z = arr[i].z;
-		int y = arr[i].y;
-		int m = arr[i].m = floor(time / ceil((t * z + y) / z));
-		/*
-		// lets search max balloons can be inflated in time
-		int lo = 0, hi = 1e9, mid;
-		while (lo + 1 < h)
-		{
-			mid = l + (h - l) / 2;
-			if (valid2(t, z, y, mid, time))
-				l = mid;
-			else
-				h = mid;
-		}
-		*/
-		total += m;
+int m, n;
+vector <at> arr;
+
+bool can(int time) {
+	int gen = 0;
+	for (at &e: arr) {
+		int xtime = e.x * e.t + e.y;
+		gen += (time/xtime)*e.x + min(e.x, (time%xtime)/e.t);
 	}
-	return (total >= m);
+	return gen >= m;
 }
 
-int32_t	main(void)
+signed main()
 {
-	int m, n;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 	cin >> m >> n;
-
-	ps	arr[n];
-	for (int i = 0; i < n; i++)
-		cin >> arr[i].t >> arr[i].z >> arr[i].y;
-
-	int	lo = 0, hi = (int)1e9, mid;
-
-	while (hi > lo + 1)
-	{
-		mid = lo + (hi - lo) / 2;
-		if (valid(arr, n, m, mid))
-			hi = mid;
-		else
-			lo = mid;
+	arr = vector<at>(n);
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i].t >> arr[i].x >> arr[i].y;
 	}
-	cout << hi << "\n";
-	for (int i = 0; i < n; i++)
-		cout << arr[i].m << " ";
-	cout << "\n";
+	int lo = 0, hi = (int)1e12, mid, ans;
+	while (lo <= hi) {
+		mid = lo+(hi-lo)/2;
+		if (can(mid)) {
+			ans = mid;
+			hi = mid - 1;
+		}
+		else {
+			lo = mid + 1;
+		}
+	}
+	cout << ans << endl;
+	int gen = 0;
+	for (at &e: arr) {
+		int xtime = e.x * e.t + e.y;
+		int greedy = min((ans/xtime)*e.x + min(e.x, (ans%xtime)/e.t), m - gen);
+		cout << greedy << " ";
+		gen += greedy;
+	}
 }
