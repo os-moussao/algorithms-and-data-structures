@@ -6,6 +6,9 @@ struct segTree {
 	T fn(T a, T b) { return a + b; } // (any associative fn)
 	vector<T> s; int n;
 	segTree(int n = 0, T def = identity) : s(4*n, def), n(n) {}
+	segTree(vector <T> &a) : s(4*a.size()), n(a.size()) {
+		for (int i = 0; i < n; i++) update(i, a[i]);
+	}
 	void update(int pos, T val) {
 		for (s[pos += n] = val; pos /= 2;)
 			s[pos] = fn(s[pos * 2], s[pos * 2 + 1]);
