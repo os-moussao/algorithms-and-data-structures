@@ -46,6 +46,7 @@ typedef vector<bool> vb;
 
 template<class T> bool ckmin(T& a, const T b) { return b < a ? a = b, 1 : 0; }
 template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
+template<class T> bool ft_swap(T &mn, T &mx) {return mn > mx? (swap(mn, mx), 1): 0;}
 
 void solve()
 {
