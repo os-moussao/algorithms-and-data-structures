@@ -13,8 +13,8 @@ struct segTree {
 		for (s[pos += n] = val; pos /= 2;)
 			s[pos] = fn(s[pos * 2], s[pos * 2 + 1]);
 	}
-	T query(int b, int e) { // query [b, e)
-		T ra = identity, rb = identity;
+	T query(int b, int e) { // query [b, e]
+		T ra = identity, rb = identity; e++;
 		for (b += n, e += n; b < e; b /= 2, e /= 2) {
 			if (b % 2) ra = fn(ra, s[b++]);
 			if (e % 2) rb = fn(s[--e], rb);
