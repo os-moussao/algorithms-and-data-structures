@@ -111,26 +111,23 @@ private:
 };
 
 // Longest path in a directed acyclic graph O(N+M)
-// src: geeks_for_geeks 
-void ldp_dfs(Graph &g, int node, int dp[], bool vis[])
-{
-    vis[node] = true;
-    for (int i = 0; i < g.adj[node].size(); i++) {
-        if (!vis[g.adj[node][i]])
-            ldp_dfs(g, g.adj[node][i], dp, vis);
-        dp[node] = max(dp[node], 1 + dp[g.adj[node][i]]);
-    }
+int ldp_dfs(Graph &g, int s, int dp[], bool vis[]) {
+	vis[s] = 1;
+	if (dp[s] != -1) return dp[s];
+	dp[s] = 0;
+	for (int u: g.adj[s]) {
+		dp[s] = max(dp[s], 1 + ldp_dfs(g, u, dp, vis));
+	}
+	return dp[s];
 }
-int longest_directed_path(Graph &g)
-{
-    int ans = 0;
-	int n = g.size();
-    int dp[n]; memset(dp, 0, sizeof(dp));
-    bool vis[n]; memset(vis, 0, sizeof(vis));
-    for (int i = 0; i < n; i++) {
-        if (!vis[i]) ldp_dfs(g, i, dp, vis);
-    }
-    for (int i = 0; i < n; i++)
-        ans = max(ans, dp[i]);
-    return ans;
+
+int ldp(Graph &g) {
+	// dp[i] = ldp starting from i
+	int dp[g.size()]; memset(dp, -1, sizeof dp);
+	bool vis[g.size()]; memset(vis, 0, sizeof vis);
+	int ans = 0;
+	for (int i = 0; i < g.size(); i++) {
+		if (!vis[i]) ans = max(ans, ldp_dfs(g, i, dp, vis));
+	}
+	return ans;
 }
