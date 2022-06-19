@@ -68,6 +68,7 @@ typedef vector<pci> vpci;
 #define MAXVEC(vec) *max_element(ALL(vec))
 #define MINVEC(vec) *min_element(ALL(vec))
 #define getunique(vec)  {sort(vec.begin(), vec.end()); vec.erase(unique(vec.begin(), vec.end()), vec.end());}
+#define popcount(x) __builtin_popcountll(x);
 
 template<class T> bool ckmin(T& a, const T b) { return b < a ? a = b, 1 : 0; }
 template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
