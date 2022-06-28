@@ -1,0 +1,113 @@
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cassert>
+#include <climits>
+#include <cstdint>
+#include <cmath>
+#include <complex>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <memory>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <stack>
+#include <string>
+#include <unordered_set>
+#include <unordered_map>
+#include <vector>
+#include <deque>
+
+using namespace std;
+#define int long long
+#define double long double
+#define endl '\n'
+
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int, int> pi;
+typedef vector<pi> vpi;
+typedef vector<bool> vb;
+
+#define MP(x, y) make_pair(x, y)
+#define ALL(a) a.begin(), a.end()
+#define RALL(a) a.rbegin(), a.rend()
+#define YESORNO(x) cout << (x? "YES\n": "NO\n")
+#define MAXVEC(vec) *max_element(ALL(vec))
+#define MINVEC(vec) *min_element(ALL(vec))
+#define getunique(vec) {sort(vec.begin(), vec.end()); vec.erase(unique(vec.begin(), vec.end()), vec.end());}
+#define popcount(x) __builtin_popcountll(x);
+
+template<class T> bool ckmin(T& a, const T b) { return b < a ? a = b, 1 : 0; }
+template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
+template<class T> bool ft_swap(T &mn, T &mx) {return mn > mx? (swap(mn, mx), 1): 0;}
+
+bool ask(int l, int r) {
+	cout << "? " << l << " " << r << endl << flush;
+	int d=0;
+	for (int i = l; i <= r; i++) {
+		int x; cin >> x;
+		d += (x>=l && x <= r);
+	}
+	return d&1;
+}
+
+int guess(int l, int r) {
+	int mid = l + (r-l)/2;
+	if (ask(l, mid)) {
+		if (mid-l+1 > 1) {
+			return guess(l, mid);
+		}
+		else {
+			return l;
+		}
+	}
+	else {
+		mid++;
+		if (r-mid+1 > 1) {
+			return guess(mid, r);
+		}
+		else {
+			return r;
+		}
+	}
+}
+
+void solve()
+{
+	int n; cin >> n;
+	if (n == 1) {
+		cout << "! 1" << endl << flush;
+		return ;
+	}
+	int ans = guess(1, n);
+	cout << "! " << ans << endl << flush;
+}
+
+void preprocessing() {}
+
+bool MULTY_TEST_CASES = 1;
+
+int32_t main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout << setprecision(20);
+	cout << fixed;
+
+	preprocessing();
+
+	int t = 1;
+	if (MULTY_TEST_CASES) cin >> t;
+
+	while (t--) {
+		solve();
+	}
+}
