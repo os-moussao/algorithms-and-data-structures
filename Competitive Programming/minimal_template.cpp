@@ -30,13 +30,6 @@ using namespace std;
 #define double long double
 #define endl '\n'
 
-typedef vector<int> vi;
-typedef vector<vi> vvi;
-typedef pair<int, int> pi;
-typedef vector<pi> vpi;
-typedef vector<bool> vb;
-
-#define MP(x, y) make_pair(x, y)
 #define ALL(a) a.begin(), a.end()
 #define RALL(a) a.rbegin(), a.rend()
 #define YESORNO(x) cout << (x? "YES\n": "NO\n")
@@ -48,6 +41,12 @@ typedef vector<bool> vb;
 template<class T> bool ckmin(T& a, const T b) { return b < a ? a = b, 1 : 0; }
 template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
 template<class T> bool ft_swap(T &mn, T &mx) {return mn > mx? (swap(mn, mx), 1): 0;}
+
+#ifdef LOCAL
+#include "debug.hpp"
+#else
+#define debug(x...)
+#endif
 
 void solve()
 {
