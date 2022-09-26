@@ -27,6 +27,9 @@ public:
 	void update(int x,int y, int val) {
 		updatex(1,0,lenx-1,x,y,val);
 	}
+	int query(pair<int,int> a, pair <int, int> b) {
+		return query(a.first, b.first, a.second, b.second);
+	}
 private:
 	void buildy(int idx, int idy, int lx, int rx, int ly, int ry)
 	{
