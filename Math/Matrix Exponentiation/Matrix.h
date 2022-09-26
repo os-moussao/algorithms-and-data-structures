@@ -24,6 +24,10 @@ struct Matrix{
 		}
 		return product;
 	}
+
+    vector <int> & operator[] (int i) {
+        return a[i];
+    }
 };
 
 Matrix getIdentity(int n) {
@@ -34,12 +38,13 @@ Matrix getIdentity(int n) {
 	return ans;
 }
 
-Matrix pow(Matrix A, int n) {
-	assert(A.n == A.m);
-	Matrix ans = getIdentity(A.n);
-	while(n) {
-		if(n&1) ans = ans * A, n--;
-		A = A*A, n /= 2;
+Matrix power_mat(Matrix mat, int n) {
+	assert(mat.n==mat.m);
+	Matrix res = getIdentity(mat.n);
+	while (n) {
+		if (n&1) res = res * mat;
+		mat = mat * mat;
+		n >>= 1;
 	}
-	return ans;
+	return res;
 }
