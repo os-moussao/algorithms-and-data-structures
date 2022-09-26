@@ -34,3 +34,25 @@ int32_t main(void)
 		cout << power(a, b) << "\n";
 	}
 }
+/*
+int power(int a, int b, int c) {
+	int res = 1;
+	a %= c;
+	while (b) {
+		if (b&1) res = (res * a)%c;
+		a = (a*a) % c;
+		b >>= 1;
+	}
+	return res;
+}
+
+int power(int a, int b) {
+	int res = 1;
+	while (b) {
+		if (b&1) res *= a;
+		a *= a;
+		b >>= 1;
+	}
+	return res;
+}
+*/
