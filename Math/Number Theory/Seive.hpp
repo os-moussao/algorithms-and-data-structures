@@ -1,3 +1,5 @@
+#pragma once
+
 bitset<(int)1e6> seive;
 vector<int> primes;
 void pre() {
