@@ -30,3 +30,17 @@ void preFact() {
 int nCk(int n, int k) {
 	return k > n? 0: (fact[n] * ((ifact[n-k] * ifact[k]) % MOD)) % MOD;
 }
+
+// Euler's totient function
+// a^phi(m) = 1 [modulo m] if a and m are coprimes
+int phi(int x) {
+	int res = x;
+	for (int i = 2; i*i <= x; i++) {
+		if (x%i == 0) {
+			while (x%i == 0) x /= i;
+			res -= res / i;
+		}
+	}
+	if (x > 1) res -= res / x;
+	return res;
+}
