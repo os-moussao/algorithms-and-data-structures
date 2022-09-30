@@ -44,3 +44,25 @@ int phi(int x) {
 	if (x > 1) res -= res / x;
 	return res;
 }
+
+// phi preprocessing from 1 to n
+const int MAXN = 1e6 + 5;
+int phi[MAXN];
+void prePhi() {
+	for (int i=0; i < MAXN; i++) phi[i] = i;
+	bitset<MAXN> seive;
+	for (int i = 2; i*i < MAXN; i++) {
+		if (!seive[i]) {
+			for (int j = i*i; j < MAXN; j += i) {
+				seive[j] = 1;
+			}
+		}
+	}
+	for (int i = 2; i < MAXN; i++) {
+		if (!seive[i]) {
+			for (int j = i; j < MAXN; j += i) {
+				phi[j] -= phi[j] / i;
+			}
+		}
+	}
+}
