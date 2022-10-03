@@ -4,10 +4,10 @@ const int MOD = (1e9 + 7);
 
 int power(int a, int b, int c=MOD) {
 	int res = 1;
-	a %= MOD;
+	a %= c;
 	while (b) {
-		if (b&1) res = (res * a) % MOD;
-		a = (a * a) % MOD;
+		if (b&1) res = (res * a) % c;
+		a = (a * a) % c;
 		b >>= 1;
 	}
 	return res;
