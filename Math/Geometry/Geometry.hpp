@@ -4,9 +4,9 @@
 struct Rect {
 	int x1, y1, x2, y2;
 	Rect(int x1=0, int y1=0, int x2=0, int y2=0) : x1(x1), x2(x2), y1(y1), y2(y2) {}
-	int area() {
-		return (x2-x1)*(y2-y1);
-	}
+	int area() { return w()*h(); }
+	int w() { return x2-x1; }
+	int h() { return y2-y1; }
 	Rect inter(Rect r) {
 		int lx, rx, ly, ry;
 		lx = max(x1, r.x1), rx = min(x2, r.x2);
