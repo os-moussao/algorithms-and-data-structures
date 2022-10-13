@@ -2,7 +2,7 @@
 #pragma once
 
 #define rep(i, a, b) for(int i = a; i < (b); ++i)
-#define all(x) begin(x), end(x)
+#define ALL(x) begin(x), end(x)
 #define SZ(x) (int)(x).size()
  
 typedef complex<double> C;
@@ -33,7 +33,7 @@ vd conv(const vd& a, const vd& b) {
 	vd res(SZ(a) + SZ(b) - 1);
 	int L = 32 - __builtin_clz(SZ(res)), n = 1 << L;
 	vector<C> in(n), out(n);
-	copy(all(a), begin(in));
+	copy(ALL(a), begin(in));
 	rep(i,0,SZ(b)) in[i].imag(b[i]);
 	fft(in);
 	for (C& x : in) x *= x;
