@@ -7,7 +7,7 @@ using namespace std;
 #define ALL(a) a.begin(), a.end()
 #define RALL(a) a.rbegin(), a.rend()
 #define YESORNO(x) cout << (x? "YES\n": "NO\n")
-#define size(x) (int)(x.size())
+#define SZ(x) (int)(x.size())
 
 template<class T> bool ckmin(T& a, const T b) { return b < a ? a = b, 1 : 0; }
 template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
