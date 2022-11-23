@@ -18,15 +18,17 @@ template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
 #define debug(x...)
 #endif
 
+void solve(int test_case) {
+	
+}
+
 int32_t main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 
-	int t = 1;
-	cin >> t;
-
-	while (t--) {
-		
+	int t; cin >> t;
+	for (int i = 1; i <= t; i++) {
+		solve(i);
 	}
 }
