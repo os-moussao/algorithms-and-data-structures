@@ -72,3 +72,7 @@ void prePhi() {
 		}
 	}
 }
+
+int inv(int a, int m) {
+	return power(a, phi[m]-1, m); // or phi(m)-1 depends if m is big or no !
+}
