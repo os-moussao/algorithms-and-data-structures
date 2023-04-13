@@ -24,3 +24,5 @@ In this repo I share what I practice everyday to get good at solving problems, a
 ### Sites
 * [cp-algorithms](https://cp-algorithms.com/)
 * [cppreference](https://en.cppreference.com/w/cpp/container)
+* [Wolfram|Alpha](https://www.wolframalpha.com/)
+* [Encyclopedia of sequences](https://oeis.org/)
