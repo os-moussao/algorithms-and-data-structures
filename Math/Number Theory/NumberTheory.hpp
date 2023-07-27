@@ -17,6 +17,22 @@ int inv(int a) {
 	return power(a, MOD-2);
 }
 
+int addMod(int a, int b) {
+	return ((a%MOD + b%MOD) % MOD + MOD) % MOD;
+}
+
+int subMod(int a, int b) {
+	return addMod(a, -b);
+}
+
+int multMod(int a, int b) {
+	return ((a%MOD * b%MOD) % MOD + MOD) % MOD;
+}
+
+int divMod(int a, int b) {
+	return multMod(a, inv(b));
+}
+
 const int MAXN = 2e5 + 5;
 int fact[MAXN], ifact[MAXN];
 void preFact() {
