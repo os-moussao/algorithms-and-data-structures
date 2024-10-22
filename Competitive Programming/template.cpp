@@ -11,7 +11,7 @@ using namespace std;
 template<class T> bool ckmin(T& a, const T b) { return b < a ? a = b, 1 : 0; }
 template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
 
-#ifdef LOCAL
+#ifdef ONLINE_JUDGE
 #include "debug.hpp"
 #else
 #define debug(x...)
@@ -21,8 +21,7 @@ void solve(int testCase) {
   
 }
 
-int32_t main()
-{
+int32_t main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
 
