@@ -1,11 +1,11 @@
 // from kactl
-struct segTree {
+struct SegTree {
 	typedef int T;
 	static const T identity = 0;
 	T fn(T a, T b) { return a + b; } // (any associative fn)
 	vector<T> s; int n;
-	segTree(int n = 0, T def = identity) : s(4*n, def), n(n) {}
-	segTree(vector <T> &a) : s(4*a.size()), n(a.size()) {
+	SegTree(int n = 0, T def = identity) : s(4*n, def), n(n) {}
+	SegTree(vector <T> &a) : s(4*a.size()), n(a.size()) {
 		for (int i = 0; i < n; i++) update(i, a[i]);
 	}
 	void update(int pos, T val) {
@@ -23,7 +23,7 @@ struct segTree {
 };
 
 // from https://github.com/jalalium/cpTemplates
-class segTree2d {
+class SegTree2d {
 	int lenx;
 	int leny;
 	vector<vector<int>> all;
@@ -31,8 +31,8 @@ class segTree2d {
 	static const int identity = 0;
 	int fn(int a, int b) {return a + b;}
 public:
-	segTree2d(){}
-	segTree2d(vector<vector<int>> inp) {
+	SegTree2d(){}
+	SegTree2d(vector<vector<int>> inp) {
 		lenx = inp.size();
 		leny = inp[0].size();
 		all = inp;
