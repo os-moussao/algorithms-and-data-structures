@@ -1,14 +1,16 @@
 class FenwickTree {
   const int IDENTITY = 0;
   int fn(int a, int b) { return a+b; }
-  int revFn(int a, int b) { return a-b; }
-  int diff(int i, int x) { return revFn(x, a[i]); }
+  int invFn(int a, int b) { return a-b; }
+  int diff(int i, int x) { return invFn(x, a[i]); }
   vector<int> bit, a;
 public:
   FenwickTree(int n): bit(n, IDENTITY), a(n, IDENTITY) {}
-  FenwickTree(vector<int> &a): bit(SZ(a), IDENTITY), a(SZ(a), IDENTITY) {
+  FenwickTree(vector<int> &a): bit(SZ(a), IDENTITY), a(a) {
     for (int i = 0; i < SZ(a); i++) {
-      this->update(i, a[i]);
+      bit[i] = fn(bit[i], a[i]);
+      int r = i | (i+1);
+      if (r < SZ(a)) bit[r] = fn(bit[r], bit[i]);
     }
   }
   void update(int i, int x) {
@@ -26,6 +28,6 @@ public:
     return res;
   }
   int query(int l, int r) {
-    return l > 0 ? revFn(query(r), query(l-1)): query(r);
+    return l == r ? a[l]: l > 0 ? invFn(query(r), query(l-1)): query(r);
   }
 };
