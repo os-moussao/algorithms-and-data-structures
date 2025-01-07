@@ -5,7 +5,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 template <class T> using OrderedSet = tree<T, null_type, less<T>, rb_tree_tag,tree_order_statistics_node_update>;
-template <class T> using MultiOrderedSet = tree<T, null_type, less_equal<T>, rb_tree_tag,tree_order_statistics_node_update>;
+template <class T> using OrderedMultiSet = tree<T, null_type, less_equal<T>, rb_tree_tag,tree_order_statistics_node_update>;
 #define int long long
 #define double long double
 #define endl '\n'
