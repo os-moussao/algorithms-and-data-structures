@@ -1,9 +1,10 @@
 // from kactl library
+#define rep(i,a,b) for (int i = (a); i < (b); i++)
 template<class T>
-struct RMQ {
+struct SparseTable {
 	T fn(T a, T b) {return max(a, b); }
 	vector<vector<T>> jmp;
-	RMQ(const vector<T>& V) : jmp(1, V) {
+	SparseTable(const vector<T>& V) : jmp(1, V) {
 		for (int pw = 1, k = 1; pw * 2 <= SZ(V); pw *= 2, ++k) {
 			jmp.emplace_back(SZ(V) - pw * 2 + 1);
 			rep(j,0,SZ(jmp[k]))
@@ -19,9 +20,9 @@ struct RMQ {
 
 // with template function
 template<class T, const T& (*fn)(const T&, const T&)>
-struct RMQ {
+struct SparseTable {
 	vector<vector<T>> jmp;
-	RMQ(const vector<T>& V) : jmp(1, V) {
+	SparseTable(const vector<T>& V) : jmp(1, V) {
 		for (int pw = 1, k = 1; pw * 2 <= SZ(V); pw *= 2, ++k) {
 			jmp.emplace_back(SZ(V) - pw * 2 + 1);
 			rep(j,0,SZ(jmp[k]))
