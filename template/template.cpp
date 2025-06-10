@@ -22,6 +22,7 @@ template<class T> bool ckmax(T& a, const T b) { return a < b ? a = b, 1 : 0; }
 #define debug(x...)
 #endif
 
+#define MULTIPLE_TEST_CASES true
 void solve(int testCase) {
   
 }
@@ -29,8 +30,8 @@ void solve(int testCase) {
 int32_t main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-
-  int t; cin >> t;
+  int t = 1;
+  if (MULTIPLE_TEST_CASES) cin >> t;
   while (t--) {
     solve(t);
   }
