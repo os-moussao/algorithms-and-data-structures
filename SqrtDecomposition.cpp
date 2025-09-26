@@ -63,14 +63,17 @@ struct Query {
 // my usual solve function
 void solve() {
   int n, q; cin >> n >> q;
+  block_size = sqrt(n);
+  
+  vector<Query> queries(q);
+  vector<int> answers(q);
   
   // TODO: remove value at idx from data structure
-  function<int(int)> remove = [&](int idx) {
-    return 1;
+  function<void(int)> remove = [&](int idx) {
   };
 
   // TODO: add value at idx from data structure
-  function<int(int)> add = [&](int idx) {
+  function<void(int)> add = [&](int idx) {
     return 1;
   };
 
@@ -79,12 +82,8 @@ void solve() {
     return 1;
   };
 
-  // int block_size = sqrt(n);
-  vector<Query> queries(q);
-  vector<int> answers(queries.size());
 
-
-  function<void(void)> mo_s_algorithm = [&]() {
+  function<void(void)> mos_algorithm = [&]() {
       sort(queries.begin(), queries.end());
 
       // TODO: initialize data structure
@@ -112,4 +111,6 @@ void solve() {
           answers[q.idx] = get_answer();
       }
   };
+
+  mos_algorithm();
 }
