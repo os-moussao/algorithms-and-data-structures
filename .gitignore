@@ -4,3 +4,4 @@ test.cpp
 *.bin
 .DS_Store
 *.dSYM
+*.ign.*
