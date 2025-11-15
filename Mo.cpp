@@ -74,7 +74,6 @@ void solve() {
 
   // TODO: add value at idx from data structure
   function<void(int)> add = [&](int idx) {
-    return 1;
   };
 
   // TODO: extract the current answer of the data structure
