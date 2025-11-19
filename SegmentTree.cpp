@@ -4,8 +4,8 @@ struct SegTree {
 	static const T identity = 0;
 	T fn(T a, T b) { return a + b; } // (any associative fn)
 	vector<T> s; int n;
-	SegTree(int n = 0, T def = identity) : s(4*n, def), n(n) {}
-	SegTree(vector <T> &a) : s(4*a.size()), n(a.size()) {
+	SegTree(int n = 0, T def = identity) : s(2*n, def), n(n) {}
+	SegTree(vector <T> &a) : s(2*a.size()), n(a.size()) {
 		for (int i = 0; i < n; i++) update(i, a[i]);
 	}
 	void update(int pos, T val) {
