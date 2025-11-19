@@ -22,6 +22,70 @@ struct SegTree {
 	}
 };
 
+
+// seg tree recursive implementation
+struct Tree {
+  typedef int T;
+  static constexpr T identity = 0;
+  int n;
+  vector<T> tree;
+
+  T fn(T a, T b) { return a + b; }
+
+  Tree(vector<T> &a) {
+    n = a.size();
+    tree.resize(4 * n);
+    build(1, 0, n - 1, a);
+  }
+
+  Tree(int n): n(n) {
+    tree.assign(4 * n, identity);
+  }
+  
+  void build(int idx, int l, int r, vector<T> &a) {
+    if (l == r) {
+      tree[idx] = a[l];
+      return ;
+    }
+    int mid = (l+r) / 2;
+    build(idx * 2, l, mid, a);
+    build(idx * 2 + 1, mid+1, r, a);
+    tree[idx] = fn(tree[2*idx],tree[2*idx+1]);
+  }
+
+  void update(int idx, int l, int r, int pos, T val) {
+    if (l == r) {
+      tree[idx] = val;
+      return ;
+    }
+    if (pos < l || pos > r) return ;
+    int mid = (l+r)/2;
+    update(idx*2, l, mid, pos, val);
+    update(idx*2+1, mid+1, r, pos, val);
+    tree[idx] = fn(tree[2*idx], tree[2*idx+1]);
+  }
+
+  void update(int pos, T val) {
+    return update(1, 0, n-1, pos, val);
+  }
+
+  T query(int idx, int l, int r, int ql, int qr) {
+    if (ql <= l && r <= qr) {
+      return tree[idx];
+    }
+    if (l > qr || r < ql) {
+      return identity;
+    }
+    int mid = (l + r) / 2;
+    return fn(query(2*idx, l, mid, ql, qr), query(2*idx+1, mid+1, r, ql, qr));
+  }
+
+  T query(int l, int r) {
+    return query(1, 0, n-1, l, r);
+  }
+};
+
+
 // from https://github.com/jalalium/cpTemplates
 class SegTree2d {
 	int lenx;
