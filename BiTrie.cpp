@@ -22,6 +22,22 @@ struct Trie {
       cur -> sz++;
     }
   }
+  void erase(int val) {
+    if (get_min(val)) return ; // value not present
+    node *cur = root;
+    cur -> sz--;
+    for (int i = B - 1; i >= 0; i--) {
+      int b = val >> i & 1;
+      node* nxtNode = cur -> nxt[b];
+      nxtNode -> sz--;
+      if (nxtNode -> sz == 0) {
+        cur -> nxt[b] = NULL;
+        del(nxtNode);
+        return;
+      }
+      cur = nxtNode;
+    }
+  }
   int query(int x, int k) { // number of values s.t. val ^ x < k
     node* cur = root;
     int ans = 0;
