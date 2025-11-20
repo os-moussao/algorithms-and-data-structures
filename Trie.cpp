@@ -1,6 +1,5 @@
 // source: https://gist.github.com/hrsvrdhn/1ae71c25ef1c620c022a544d52df8928
-struct Trie
-{
+struct Trie {
   map<char,Trie*> children;
   int prefixes;
   bool endofword;
@@ -8,15 +7,12 @@ struct Trie
     prefixes=0;
     endofword=false;
   }
-  void insert(string word)
-  {
+  void insert(string word) {
     Trie *current=this;
-    for(int i=0;i<word.size();i++)
-    {
+    for(int i=0;i<word.size();i++) {
       char ch=word[i];
       Trie *node=current->children[ch];
-      if(!node)
-      {
+      if(!node) {
         node=new Trie();
         current->children[word[i]]=node;
       }
@@ -25,11 +21,9 @@ struct Trie
     }
     current->endofword=true;
   }
-  bool search(string word)
-  {
+  bool search(string word) {
     Trie *current=this;
-    for(int i=0;i<word.size();i++)
-    {
+    for(int i=0;i<word.size();i++) {
       char ch=word[i];
       Trie *node=current->children[ch];
       if(!node)
@@ -38,19 +32,32 @@ struct Trie
     }
     return current->endofword;
   }
-  int countPrefix(string word)
-  {
+  int countPrefix(string word) {
     Trie *current=this;
-    for(int i=0;i<word.size();i++)
-    {
+    for(int i=0;i<word.size();i++) {
       char ch=word[i];
       Trie *node=current->children[ch];
-      if(!node)
-      {
+      if(!node) {
         return 0;
       }
       current=node;
     }
     return current->prefixes;
+  }
+  void erase(string word) {
+    if (!search(word)) return;
+    Trie *current = this;
+    for(int i = 0; i < word.size(); i++) { 
+      char ch = word[i];
+      Trie *node = current->children[ch];
+      node->prefixes--;
+      if (node->prefixes == 0) {
+        current->children.erase(ch);
+        delete node;
+        return;
+      }
+      current = node;
+    }
+    current->endofword = false;
   }
 };
