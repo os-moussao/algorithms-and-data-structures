@@ -77,3 +77,48 @@ struct Trie {
   }
   ~Trie() { del(root); }
 };
+
+// Memory optimized version
+struct Trie {
+  static const int B = 31;
+  int sz = 1;
+  struct node {
+    int32_t nxt[2];
+    int sz;
+    node() {
+      nxt[0] = nxt[1] = 0;
+      sz = 0;
+    }
+  };
+  vector<node> data;
+  int new_node() {
+    return ++sz;
+  }
+  Trie(int mxSz) {
+    data.assign(mxSz, node());
+    sz = 1;
+  }
+  void insert(int val) {
+    int curr = 1;
+    data[curr].sz++;
+    for (int i = B - 1; i >= 0; i--) {
+      int b = val >> i & 1;
+      if (data[curr].nxt[b] == 0) data[curr].nxt[b] = new_node();
+      curr = data[curr].nxt[b];
+      data[curr].sz++;
+    }
+  }
+  int query(int x, int k) { // number of values s.t. val ^ x < k
+    int cur = 1;
+    int ans = 0;
+    for (int i = B - 1; i >= 0; i--) {
+      if (cur == 0) break;
+      int b1 = x >> i & 1, b2 = k >> i & 1;
+      if (b2 == 1) {
+        if (data[cur].nxt[b1]) ans += data[data[cur].nxt[b1]].sz;
+        cur = data[cur].nxt[!b1];
+      } else cur = data[cur].nxt[b1];
+    }
+    return ans;
+  }
+};
