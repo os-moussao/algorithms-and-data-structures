@@ -1,3 +1,100 @@
+
+// Memory optimized version
+// src: AI generated based on the original source code
+// USAGE: Trie trie(n * Trie::B + 5);
+struct Trie {
+  static const int B = 31;
+  int sz = 1;
+  struct node {
+    int32_t nxt[2];
+    int sz;
+    node() {
+      nxt[0] = nxt[1] = 0;
+      sz = 0;
+    }
+  };
+  vector<node> data;
+  int new_node() {
+    return ++sz;
+  }
+  Trie(int mxSz) {
+    data.assign(mxSz, node());
+    sz = 1;
+  }
+  void insert(int val) {
+    int curr = 1;
+    data[curr].sz++;
+    for (int i = B - 1; i >= 0; i--) {
+      int b = val >> i & 1;
+      if (data[curr].nxt[b] == 0) data[curr].nxt[b] = new_node();
+      curr = data[curr].nxt[b];
+      data[curr].sz++;
+    }
+  }
+  void erase(int val) {
+    if (get_min(val) != 0) return; // Value not present in Trie
+    int curr = 1;
+    data[curr].sz--; // Decrement root size
+    for (int i = B - 1; i >= 0; i--) {
+      int b = val >> i & 1;
+      int nxt_node = data[curr].nxt[b];
+      data[nxt_node].sz--;
+      if (data[nxt_node].sz == 0) {
+        data[curr].nxt[b] = 0; // Disconnect the branch
+        return;
+      }
+      curr = nxt_node;
+    }
+  }
+  int query(int x, int k) { // number of values s.t. val ^ x < k
+    int cur = 1;
+    int ans = 0;
+    for (int i = B - 1; i >= 0; i--) {
+      if (cur == 0) break;
+      int b1 = x >> i & 1, b2 = k >> i & 1;
+      if (b2 == 1) {
+        if (data[cur].nxt[b1]) ans += data[data[cur].nxt[b1]].sz;
+        cur = data[cur].nxt[!b1];
+      } else cur = data[cur].nxt[b1];
+    }
+    return ans;
+  }
+  // Returns maximum of val ^ x
+  int get_max(int x) {
+    int curr = 1;
+    int ans = 0;
+    for (int i = B - 1; i >= 0; i--) {
+      int k = x >> i & 1;
+      if (data[curr].nxt[!k]) {
+        curr = data[curr].nxt[!k];
+        ans <<= 1;
+        ans++;
+      } else {
+        curr = data[curr].nxt[k];
+        ans <<= 1;
+      }
+    }
+    return ans;
+  }
+  // Returns minimum of val ^ x
+  int get_min(int x) {
+    int curr = 1;
+    int ans = 0;
+    for (int i = B - 1; i >= 0; i--) {
+      int k = x >> i & 1;
+      if (data[curr].nxt[k]) {
+        curr = data[curr].nxt[k];
+        ans <<= 1;
+      } else {
+        curr = data[curr].nxt[!k];
+        ans <<= 1;
+        ans++;
+      }
+    }
+    return ans;
+  }
+};
+
 // src: https://github.com/ShahjalalShohag/code-library/blob/main/Data%20Structures/Trie.cpp
 struct Trie {
   static const int B = 31;
@@ -76,49 +173,4 @@ struct Trie {
     delete(cur);
   }
   ~Trie() { del(root); }
-};
-
-// Memory optimized version
-struct Trie {
-  static const int B = 31;
-  int sz = 1;
-  struct node {
-    int32_t nxt[2];
-    int sz;
-    node() {
-      nxt[0] = nxt[1] = 0;
-      sz = 0;
-    }
-  };
-  vector<node> data;
-  int new_node() {
-    return ++sz;
-  }
-  Trie(int mxSz) {
-    data.assign(mxSz, node());
-    sz = 1;
-  }
-  void insert(int val) {
-    int curr = 1;
-    data[curr].sz++;
-    for (int i = B - 1; i >= 0; i--) {
-      int b = val >> i & 1;
-      if (data[curr].nxt[b] == 0) data[curr].nxt[b] = new_node();
-      curr = data[curr].nxt[b];
-      data[curr].sz++;
-    }
-  }
-  int query(int x, int k) { // number of values s.t. val ^ x < k
-    int cur = 1;
-    int ans = 0;
-    for (int i = B - 1; i >= 0; i--) {
-      if (cur == 0) break;
-      int b1 = x >> i & 1, b2 = k >> i & 1;
-      if (b2 == 1) {
-        if (data[cur].nxt[b1]) ans += data[data[cur].nxt[b1]].sz;
-        cur = data[cur].nxt[!b1];
-      } else cur = data[cur].nxt[b1];
-    }
-    return ans;
-  }
 };
