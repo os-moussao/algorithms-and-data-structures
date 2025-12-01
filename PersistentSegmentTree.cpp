@@ -66,7 +66,7 @@ class PST {
   }
 
   public:
-  PST(int n, int MX_NODES) : n(n), tree(MX_NODES) {}
+  PST(int n, int updates) : n(n), tree(2 * n + updates * (2 + ceil(log2(n)))) {}
 
   int build(const vector<int> &arr) { return build(0, n - 1, arr); }
   
